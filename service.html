@@ -3,383 +3,342 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Title -->
-    <title>PlantInfo</title>
-
-    <!-- Favicon -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Plant Codex</title>
     <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 50%, #f0fff4 100%);
+            min-height: 100vh;
+            color: #2d3748;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(112, 199, 69, 0.1);
+        }
+
+        .navbar.scrolled {
+            padding: 15px 50px;
+            box-shadow: 0 5px 30px rgba(112, 199, 69, 0.15);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #4CAF50;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #4CAF50;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #70c745, #4CAF50);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: #4CAF50;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #4CAF50;
+            transition: all 0.3s ease;
+        }
+
+        /* Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 50px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 0 auto 60px;
+            width: fit-content;
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .page-header::before {
+            content: '\f06c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            display: block;
+            margin-bottom: 20px;
+            color: #1b4332;
+            font-size: 24px;
+            animation: growLeaf 1.5s ease-out;
+            text-shadow: 0 0 15px rgba(112, 199, 69, 0.8);
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            animation: expandLine 1.5s ease-out forwards;
+            box-shadow: 0 0 10px rgba(112, 199, 69, 0.5);
+        }
+
+        @keyframes growLeaf {
+            0% {
+                transform: scale(0) rotate(-45deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes expandLine {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+
+            100% {
+                width: 120px;
+                opacity: 1;
+            }
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            color: #1b4332;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(112, 199, 69, 0.8), 2px 2px 10px rgba(0, 0, 0, 0.2);
+            letter-spacing: -1px;
+            font-weight: 700;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            margin: 0;
+            opacity: 0.9;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid #e2e8f0;
+            margin-bottom: 30px;
+        }
+
+        .service-card h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .service-card h3 {
+            color: #2d3748;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .service-card p {
+            color: #718096;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .service-card ul {
+            color: #718096;
+            line-height: 2;
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .service-card ul li {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
-<style>
-    html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    width: 100%;
-  }
-
-/* Mobile view */
-@media (max-width: 768px) {
-    html, body {
-        height: 100%;
-        overflow-y: auto; /* Allow vertical scrolling */
-        overflow-x: hidden; /* Prevent horizontal scrolling */
-        margin: 0;
-        padding: 0;
-        position: relative;
-    }
-}
-    .container1 {
-    margin-left: 30px;
-}
-
-/* Mobile view */
-@media (max-width: 768px) {
-    .container1 {
-        margin-left: 10px; /* Adjust the margin for mobile view */
-    }
-}
-
-
-    .imagec-container {
-    text-align: center;
-}
-
-.coming-soon-image {
-    width: 250px; /* Adjust the size as needed */
-    margin-right: 20px; /* Adjust the margin to shift the image to the right */
-}
-
-/* Default styling: video container */
-
-
-/* Mobile view (up to 600px wide) */
-@media only screen and (max-width: 600px) {
-    .video-icon {
-        font-size: 30px;
-        padding: 15px;
-    }
-}
-
-
-
-
-
-/* Modal Styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.8); /* Black with opacity */
-}
-
-.modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    width: 60%; /* Adjusted width for desktop view */
-    max-width: 1200px; /* Increased max width for larger screens */
-    height: auto; /* Allow height to adjust based on content */
-    max-height: 80%; /* Prevent content from exceeding screen height */
-    overflow: hidden; /* Hide overflow */
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 32px;
-    font-weight: bold;
-    margin-top: -10px; /* Adjusted positioning */
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-
-@media (max-width: 1200px) {
-    .modal-content {
-        width: 70%; /* Slightly narrower width for smaller screens */
-        max-width: 900px; /* Limit max-width for mid-size screens */
-    }
-
-    video {
-        height: 600px; /* Adjust video height for mid-size screens */
-    }
-}
-
-@media (max-width: 768px) {
-    .modal-content {
-        width: 90%; /* Wider modal on smaller screens */
-        max-width: 600px; /* Max width reduced for smaller devices */
-    }
-
-    video {
-        height: 400px; /* Smaller video height for mobile */
-    }
-}
-.slider-container {
-  position: relative;
-  max-width: 100%;
-  height: 400px;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.slides {
-  display: flex;
-  transition: transform 0.6s ease-in-out;
-  width: 100%;
-}
-
-.slides img {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.prev, .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.5);
-  border: none;
-  color: white;
-  padding: 10px 16px;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 18px;
-  transition: background-color 0.3s;
-}
-
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-.prev { left: 10px; }
-.next { right: 10px; }
-
-   </style>
-
 
 <body>
-    <!-- Preloader -->
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-circle"></div>
-        <div class="preloader-img">
-            <img src="img/core-img/s1.png" alt="">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="Plant Codex">
+                <span>Plant Codex</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="database.html"><i class="fas fa-database"></i> Database</a></li>
+                <li><a href="caretips.html"><i class="fas fa-leaf"></i> Care Tips</a></li>
+                <li><a href="service.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Our Services</h1>
+            <p>We provide the perfect service for you</p>
+        </div>
+
+        <div class="service-card">
+            <h2>Plants Information</h2>
+            <p>Our section features plant information cards, each containing the following details: Plant image, Common
+                Name, Scientific Name, Type, Height, Lifespan, Oxygen Production Level, Short Description, and links for
+                further information on Google and relevant YouTube videos (if available).</p>
+
+            <h3>What We Offer:</h3>
+            <ul>
+                <li><strong>Comprehensive Plant Database:</strong> Access detailed information about 37 unique plant
+                    species found in Teli Gali Garden & Park</li>
+                <li><strong>QR Code Integration:</strong> Scan QR codes placed near plants to instantly access their
+                    information on your smartphone</li>
+                <li><strong>Detailed Plant Cards:</strong> Each plant entry includes images, common and scientific
+                    names, type, height, lifespan, and oxygen production levels</li>
+                <li><strong>External Resources:</strong> Links to Google for additional information and YouTube videos
+                    for visual learning</li>
+                <li><strong>Location Mapping:</strong> Interactive maps showing where each plant is located in the
+                    garden</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <h2>QR Code Identification</h2>
+            <p>Visit Teli Gali Garden & Park and discover our innovative QR code system! Each tree and plant in the
+                garden is equipped with a unique QR code that provides instant access to comprehensive information.</p>
+
+            <h3>How It Works:</h3>
+            <ul>
+                <li><strong>Step 1:</strong> Locate a plant with a QR code tag in Teli Gali Garden & Park</li>
+                <li><strong>Step 2:</strong> Open your smartphone camera or QR code scanner app</li>
+                <li><strong>Step 3:</strong> Point your camera at the QR code</li>
+                <li><strong>Step 4:</strong> Tap the notification to open the plant's information page</li>
+                <li><strong>Step 5:</strong> Explore detailed information, images, and videos about the plant</li>
+            </ul>
+
+            <p>This innovative approach combines technology with nature education, making it easy for everyone to learn
+                about the plants around them while enjoying a walk in the garden.</p>
+        </div>
+
+        <div class="service-card">
+            <h2>Educational Resources</h2>
+            <p>We provide educational content to help you understand and appreciate plant life better. Our resources
+                include:</p>
+            <ul>
+                <li>Detailed plant descriptions and characteristics</li>
+                <li>Information about oxygen production and environmental benefits</li>
+                <li>Plant care tips and growing guides</li>
+                <li>Video content for visual learners</li>
+                <li>Links to scientific resources and research</li>
+            </ul>
         </div>
     </div>
-
-        <!-- ##### Header Area Start ##### -->
-        <header class="header-area">
-
-            <!-- ***** Navbar Area ***** -->
-            <div class="alazea-main-menu">
-                <div class="classy-nav-container breakpoint-off">
-                    <div class="container">
-                        <!-- Menu -->
-                        <nav class="classy-navbar justify-content-between" id="alazeaNav">
-    
-                            <!-- Nav Brand -->
-                            <!-- <a href="index.html" class="collegelogo"><img src="img/core-img/logoheade.png" alt=""></a> -->
-    
-                            <!-- Navbar Toggler -->
-                            <div class="classy-navbar-toggler">
-                                <span class="navbarToggler"><span></span><span></span><span></span></span>
-                            </div>
-    
-                            <!-- Menu -->
-                            <div class="classy-menu">
-    
-                                <!-- Close Button -->
-                                <div class="classycloseIcon">
-                                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                                </div>
-    
-                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-                                <!-- Navbar Start -->
-                                <div class="classynav">
-                                    <ul>
-                                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                                        <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
-                                        <li><a href="service.html"><i class="fas fa-cogs"></i> Services</a></li>
-                                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
-                                        <li><a href="donate.html" target="_blank"><i class="fa-solid fa-tree"></i>Donate Plant</a></li>
-                                    </ul>
-                                </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- ##### Header Area End ##### -->
-
-    <!-- ##### Breadcrumb Area Start ##### -->
-    <div class="breadcrumb-area">
-        <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(Public/Services.png);">
-            <h2>Our Services</h2>
-        </div>
-
-        <div class="container1">
-            <div class="row">
-                <div class="col-12">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active style" aria-current="page" style="color: black;">Services</li>
-
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ##### Breadcrumb Area End ##### -->
-
-
-    <!-- ##### Service Area Start ##### -->
-    <section class="our-services-area bg-gray section-padding-100-0">
-        <div class="container1">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center">
-                        <h2>OUR SERVICES</h2>
-                        <p>We provide the perfect service for you.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row align-items-center justify-content-between">
-                <div class="col-12 col-lg-5">
-                    <div class="alazea-service-area mb-100">
-
-                        <!-- Single Service Area -->
-                        <div class="single-service-area d-flex align-items-center">
-                            <!-- Icon -->
-                            <div class="service-icon mr-30">
-                                <img src="img/core-img/s1.png" alt="">
-                            </div>
-                            <!-- Content -->
-                            <div class="service-content">
-                                <h5>Plants Information</h5>
-                                <p>This section features plant information cards, each containing the following details: Plant Image, Common Name, Scientific Name, Type, Height, Lifespan, Oxygen Production Level, Short Description, and links for further information on Google and relevant YouTube videos (if available).</p>
-                            </div>
-                        </div>
- 
-                        <!-- <div class="imagec-container">
-                            <img src="img/core-img/comingsoon.png" alt="More features" class="coming-soon-image">
-                        </div> -->
-                        
-                        <!-- Single Service Area -->
-                        <div class="single-service-area d-flex align-items-center">
-                            <!-- Icon -->
-                            <div class="service-icon mr-30">
-                                <img src="img/core-img/qrsy.png" alt="QR Code" style="width: 150px; height: 80px; filter: brightness(70%);">
-
-                            </div>
-                            <!-- Content -->
-                            <div class="service-content">
-                                <h5>QR Identification</h5>
-                                <p>Each plant will be equipped with its own unique QR code. When you scan the QR code, you will instantly access detailed information specific to that plant, including its name, characteristics, care instructions, and more. This feature will simplify plant identification and enhance your learning experience, making it ideal for use in gardens, nurseries, and educational environments.</p>
-                            </div>
-                            
-                        </div>
-
-                        <!-- Single Service Area -->
-                        <!-- <div class="single-service-area d-flex align-items-center">
-                           
-                            <div class="service-icon mr-30">
-                                <img src="img/core-img/chatboat.png" alt="">
-                            </div>
-                            
-                            <div class="service-content">
-                                <h5>ChatBot</h5>
-                                <p>The ChatBot will provide instant, 24/7 support, answering questions and offering recommendations on plant care. It will also give detailed information about each plant when asked, enhancing your experience with prompt and accurate assistance.</p>
-                            </div>
-                            
-                        </div> -->
-
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-6">
-                <div class="slider-container mb-100" id="imageSlider">
-                    <div class="slides">
-                    <img src="Public/slider.png" alt="Slide 1">
-                    <img src="Public/slider 3.png" alt="Slide 2">
-                    <img src="Public/slider2.png" alt="Slide 3">
-                    </div>
-
-                    <!-- Navigation buttons -->
-                    <button class="prev">&#10094;</button>
-                    <button class="next">&#10095;</button>
-                </div>
-                </div>
-
-                    <script>
-                    // Get modal and elements
-                    const slides = document.querySelector('#imageSlider .slides');
-                    const images = slides.querySelectorAll('img');
-                    let index = 0;
-
-                    document.querySelector('.next').addEventListener('click', () => {
-                    index = (index + 1) % images.length;
-                    slides.style.transform = `translateX(-${index * 100}%)`;
-                    });
-
-                    document.querySelector('.prev').addEventListener('click', () => {
-                    index = (index - 1 + images.length) % images.length;
-                    slides.style.transform = `translateX(-${index * 100}%)`;
-                    });
-
-                    // Optional: Auto slide every 5 seconds
-                    setInterval(() => {
-                    index = (index + 1) % images.length;
-                    slides.style.transform = `translateX(-${index * 100}%)`;
-                    }, 5000);
-                    </script>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-    <!-- ##### Service Area End ##### -->
-
-    <!-- ##### All Javascript Files ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
 </body>
 
 </html>

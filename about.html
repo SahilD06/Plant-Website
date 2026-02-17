@@ -3,283 +3,367 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Title -->
-    <title>PlantInfo</title>
-
-    <!-- Favicon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Plant Codex</title>
     <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #2d3748;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('bg2.jpeg') no-repeat center center;
+            background-size: cover;
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(112, 199, 69, 0.1);
+        }
+
+        .navbar.scrolled {
+            padding: 15px 50px;
+            box-shadow: 0 5px 30px rgba(112, 199, 69, 0.15);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #4CAF50;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #4CAF50;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #70c745, #4CAF50);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: #4CAF50;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #4CAF50;
+            transition: all 0.3s ease;
+        }
+
+        /* Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 20px 50px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 0 auto 60px;
+            width: fit-content;
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .page-header::before {
+            content: '\f06c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            display: block;
+            margin-bottom: 20px;
+            color: #356550;
+            font-size: 24px;
+            animation: growLeaf 1.5s ease-out;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #1b4332, transparent);
+            animation: expandLine 1.5s ease-out forwards;
+        }
+
+        @keyframes growLeaf {
+            0% {
+                transform: scale(0) rotate(-45deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes expandLine {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+
+            100% {
+                width: 120px;
+                opacity: 1;
+            }
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            color: #1b4332;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.6);
+            letter-spacing: -1px;
+            font-weight: 700;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: #2d6a4f;
+            font-weight: 600;
+            margin: 0;
+            opacity: 0.9;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .content-section h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .content-section p {
+            color: #2d3748;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .info-card h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .info-card p {
+            color: #000000;
+            line-height: 1.7;
+            font-size: 15px;
+            font-weight: 500;
+        }
+    </style>
 </head>
-   <style>
-    html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    width: 100%;
-  }
-
-/* Mobile view */
-@media (max-width: 768px) {
-    html, body {
-        height: 100%;
-        overflow-y: auto; /* Allow vertical scrolling */
-        overflow-x: hidden; /* Prevent horizontal scrolling */
-        margin: 0;
-        padding: 0;
-        position: relative;
-    }
-}
-.container1 {
-    margin-left: 30px;
-}
-
-/* Mobile view */
-@media (max-width: 768px) {
-    .container1 {
-        margin-left: 10px; /* Adjust the margin for mobile view */
-    }
-}
-
-.team-member-info p {
-    margin: 0;
-}
-
-/* Benefits area: standardize images and center content */
-.single-benefits-area {
-    text-align: center;
-}
-.single-benefits-area img {
-    max-width: 90px;
-    height: auto;
-    display: block;
-    margin: 0 auto 12px auto;
-}
-
-
-   </style>
-
 
 <body>
-    <!-- Preloader -->
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-circle"></div>
-        <div class="preloader-img">
-            <img src="PlantInfo(Project)/Public/About.png" alt="hi">
-        </div>
-    </div>
-
-    <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
-
-        <!-- ***** Navbar Area ***** -->
-        <div class="alazea-main-menu">
-            <div class="classy-nav-container breakpoint-off">
-                <div class="container">
-                    <!-- Menu -->
-                    <nav class="classy-navbar justify-content-between" id="alazeaNav">
-
-                        <!-- Nav Brand -->
-                         <!-- <a href="index.html" class="collegelogo"><img src="img/core-img/logoheade.png" alt=""></a>  -->
-
-                        <!-- Navbar Toggler -->
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
-                        </div>
-
-                        <!-- Menu -->
-                        <div class="classy-menu">
-
-                            <!-- Close Button -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                            </div>
-
-                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-                            <!-- Navbar Start -->
-                            <div class="classynav">
-                                <ul>
-                                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                                    <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
-                                    <li><a href="service.html"><i class="fas fa-cogs"></i> Services</a></li>
-                                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
-                                    <li><a href="donate.html" target="_blank"><i class="fa-solid fa-tree"></i>Donate Plant</a></li>
-                                </ul>
-                            </div>
-                </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="Plant Codex">
+                <span>Plant Codex</span>
             </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="database.html"><i class="fas fa-database"></i> Database</a></li>
+                <li><a href="caretips.html"><i class="fas fa-leaf"></i> Care Tips</a></li>
+                <li><a href="service.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
         </div>
-    </header>
-    <!-- ##### Header Area End ##### -->
+    </nav>
 
-    <!-- ##### Breadcrumb Area Start ##### -->
-    <div class="breadcrumb-area">
-        <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(Public/About.png);">
-            <h2>ABOUT US</h2>
+    <div class="container">
+        <div class="page-header">
+            <h1>About Us</h1>
+            <p>Learn about our mission and team</p>
         </div>
 
-        <div class="container1">
-            <div class="row">
-                <div class="col-12">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active style" aria-current="page" style="color: black;">About us</li>
-                        </ol>
-                    </nav>
-                </div>
+        <div class="content-section">
+            <h2>Our Mission</h2>
+            <p>We are a group of students who created this website as part of our field project to promote awareness
+                about local plant life. Our goal is to make it easy for visitors to learn more about the trees and
+                plants around them through technology.</p>
+            <p>By scanning the QR codes placed in Teli Gali Garden & Park, users can instantly access detailed
+                information, photos, and interesting facts about each plant.</p>
+            <p>This project combines our interest in nature and web development to encourage more people to appreciate
+                and understand the greenery in their surroundings.</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Project Summary</h3>
+                <p>Our project has developed a user-friendly webpage designed to guide users through detailed
+                    information about various plant species. The webpage provides essential details in the form of cards
+                    that includes plant's image, common name, scientific name, type, height, life span, oxygen level,
+                    and a comprehensive description. Additionally, users can access further information through a Google
+                    link and explore video perspectives via a YouTube link.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Plants Database</h3>
+                <p>Our plant database includes a total of 37 flora within Teli Gali, with 37 unique plant species
+                    identified. The data, which is 100% primary, has been carefully collected through field research and
+                    digitally documented. All plant information — including names, types, and key attributes is stored
+                    as text files in the Gist directory on GitHub for transparency and future reference.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Team Management</h3>
+                <p>Our team consists of dedicated students passionate about environmental education and technology. We
+                    work collaboratively to maintain and update the plant database, ensuring accurate and up-to-date
+                    information for all users. Each team member brings unique skills in research, web development, and
+                    content creation to make this project successful.</p>
             </div>
         </div>
     </div>
-    <!-- ##### Breadcrumb Area End ##### -->
-
-    <!-- ##### About Area Start ##### -->
-    <section class="about-us-area">
-        <div class="container1">
-            <div class="row justify-content-between">
-                <div class="col-12 col-lg-5">
-                    <!-- Section Heading -->
-                    <div class="section-heading">
-                        <h2>ABOUT US</h2>
-                    </p>
-                    </div>
-<p></p>We are a group of students who created this website as part of our field project to promote awareness about local plant life. Our goal is to make it easy for visitors to learn more about the trees and plants around them through technology. By scanning the QR codes placed in Teli Gali Garden & Park, users can instantly access detailed information, photos, and interesting facts about each plant.
-
-This project combines our interest in nature and web development to encourage more people to appreciate and understand the greenery in their surroundings.
-
-
-                    <!-- Progress bars removed per request -->
-                </div>
-
-                <div class="col-12 col-lg-6">
-                    <div class="alazea-benefits-area">
-                        <div class="row">
-
-                            <!-- Single Benefits Area -->
-                            <div class="col-12 col-sm-6">
-                                <div class="single-benefits-area">
-                                    <img src="img/core-img/project.png" alt="">
-                                    <h5>Project Summary</h5>
-                                    <p>Our project has developed a user-friendly webpage designed to guide users through detailed information about various plant species. The webpage provides essential details in the form of cards that includes plant's image, common name, scientific name, type, height, life span, oxygen level, and a comprehensive description. Additionally, users can access further information through a Google link and explore video perspectives via a YouTube link.</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Benefits Area -->
-                            <div class="col-12 col-sm-6">
-                                <div class="single-benefits-area">
-                                    <img src="img/core-img/database.png" alt="">
-                                    <h5>Plants Database</h5>
-                                    <p>
-                                    Our plant database includes a total of 37 flora within Teli Gali, with 37 unique plant species identified. The data, which is 100% primary, has been carefully collected through field research and digitally documented. All plant information — including names, types, and key attributes  is stored as text files in the Gist directory on GitHub for transparency and future reference.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Single Benefits Area -->
-                            <div class="col-12 col-sm-6">
-                                <div class="single-benefits-area">
-                                    <img src="img/core-img/team.png" alt="">
-                                    <h5>Team Management</h5>
-<p>
-Our project is developed by a team of four dedicated students — Sahil, Carol, Tanvi, and Kavya — under the guidance of our mentor, Ms. Jyoti Chauhan. Each team member contributed their skills and ideas to ensure the project was completed successfully. With our mentor’s constant support and direction, we were able to combine field research with technology to create an interactive website that helps people learn more about the plants in <em>Teli Gali Garden & Park</em>. Through teamwork, creativity, and commitment, we aimed to make environmental learning simple, digital, and engaging for everyone.
-</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Benefits Area -->
-                            <div class="col-12 col-sm-6">
-                                <div class="single-benefits-area">
-                                    <img src="img/core-img/mission.png" alt="">
-                                    <h5>Target</h5>
-<p>
-Our main target is to make plant identification and learning simple, digital, and accessible for everyone. The website helps visitors easily explore information about each plant within the college and nearby gardens. By scanning the QR codes placed on trees, users can view plant details, images, and interesting facts instantly. Through this initiative, we aim to promote environmental awareness, encourage curiosity about nature, and inspire more people to appreciate the green spaces around them.
-</p>
-                                </div>
-                            </div>
-
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container1">
-            <div class="row">
-                <div class="col-12">
-                    <div class="border-line"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ##### About Area End ##### -->
-
-
-<!-- ##### Team Area Start ##### -->
-<!-- <section class="team-area section-padding-100-0">
-    <div class="container1">
-        <div class="row">
-            <div class="col-12">
-                <-- Section Heading -->
-                <!-- <div class="section-heading text-center">
-                    <h2>OUR TEAM</h2>
-                    <p>A team of dedicated experienced professionals.</p>
-                </div>
-            </div>
-        </div> -->
-
-        <div class="row">
-            <!-- Single Team Member Area -->
-            <div class="team">
-                <!-- <img src="img/core-img/Developert.png" alt="" style="width:250px; margin-left: 20px;">
-                <div class="single-team-member text-center mb-100"> -->
-                    <!-- Team Member Thumb -->
-                    <!-- <div class="team-member-thumb">
-                        <img src="img/core-img/developer.jpeg" alt="">
-                        <-- Social Info -->
-                        <!-- <div class="team-member-social-info">
-                            <div class="team-member-social-info"> --> 
-                                <!-- <a href="mailto:rajpuresahilcs222335@email.com" target="_blank"><i class="fas fa-envelope" aria-hidden="true"></i></a> -->
-                                <!-- <a href="tel:9152988255" target="_blank"><i class="fas fa-phone" aria-hidden="true"></i></a>
-                                <a href="https://www.linkedin.com/in/sahil-rajpure-b2891924b/" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a> -->
-                            </div>                            
-                            
-                        </div>
-                    </div>
-                    <!-- Team Member Info -->
-                    <!-- <div class="team-member-info mt-30"> -->
-                        <!-- <h5>Sahil Rajpure</h5>
-                        <p>Computer Science Department</p>
-                        <p>Bsc. in Computer Science</p> -->
-                    </div>
-                </div>
-            </div>   
-         </div>
-</section>
-
-
-    <!-- ##### Team Area End ##### -->
-
-    <!-- ##### All Javascript Files ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 
 </html>

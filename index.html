@@ -3,832 +3,1013 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="">
+    <meta name="description" content="Plant Codex - Discover the wonders of nature">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Title -->
-    <title>PlantInfo</title>
-
-    <!-- Favicon -->
+    <title>Plant Codex - Plant Information Hub</title>
     <link rel="icon" href="img/core-img/favicon.ico">
 
-    <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
 
     <style>
-html, body {
-    height: 100%;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    position: relative;
-}
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Mobile view */
-@media (max-width: 768px) {
-    html, body {
-        height: 100%;
-        overflow: hidden;
-        margin: 0;
-        padding: 0;
-        position: relative;
-    }
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #2d3748;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
 
-/* Mac default size laptop view */
-@media (max-width: 1440px) {
-    html, body {
-        height: 100%;
-        overflow: hidden;
-        margin: 0;
-        padding: 0;
-        position: relative;
-    }
-}
-
-
-html::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('Public/Background.png'); /* Replace with your image URL */
-    background-size: cover;
-    background-position: center;
-    filter: brightness(100%); /* Adjust the brightness to darken the image */
-    z-index: -1; /* Ensure the background image stays behind all other content */
-}
-
-        html::after {
-            content: "";
-            position: absolute;
+        body::before {
+            content: '';
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity to darken the image */
-            z-index: -1; /* Ensure the dark overlay stays behind all other content */
+            width: 100%;
+            height: 100%;
+            background: url('background.jpg') no-repeat center center;
+            background-size: cover;
+            filter: blur(3px);
+            z-index: -1;
         }
-/* Align the college logo to the left corner on large screens */
-.collegelogo {
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 10px; /* Optional: add some padding if needed */
-}
 
-.container {
-  margin-left: 800px; /* Default for larger screens */
-}
-
-@media only screen and (max-width: 991px) {
-  .container {
-    margin-left: 440px; /* For mobile and tablet views */
-  }
-}
-
-/* Ensure the logo remains aligned on larger screens */
-.collegelogo img {
-    max-width: 600px; /* Ensure the image scales properly */
-    height: 100px;
-}
-
-/* Hide the logo on smaller screens (mobile and tablet views) */
-@media (max-width: 768px) {
-    .collegelogo img {
-        max-width: 230px; /* Smaller logo size */
-        height: 70px;     /* Maintain aspect ratio */
-    }
-}
-
-
-
-.moveable-list-container {
+        /* ANIMATED BACKGROUND PARTICLES */
+        .particles {
             position: fixed;
-            top: 145px;
-            right: -220px; /* Hidden off-screen initially */
-            width: 200px;
-            height: 600px;
-            background-color: #fff;
-            border: 1px solid #000000;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 11;
-            transition: right 0.3s ease-in-out;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        .moveable-list-header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            height: 70px;
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(112, 199, 69, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 50%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            left: 60%;
+            animation-delay: 6s;
+        }
+
+        .particle:nth-child(5) {
+            width: 90px;
+            height: 90px;
+            top: 80%;
+            left: 70%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.3;
+            }
+
+            25% {
+                transform: translateY(-50px) translateX(30px) scale(1.1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translateY(-100px) translateX(-30px) scale(0.9);
+                opacity: 0.3;
+            }
+
+            75% {
+                transform: translateY(-50px) translateX(20px) scale(1.05);
+                opacity: 0.4;
+            }
+        }
+
+        /* NAVIGATION */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(112, 199, 69, 0.1);
+        }
+
+        .navbar.scrolled {
+            padding: 15px 50px;
+            box-shadow: 0 5px 30px rgba(112, 199, 69, 0.15);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #4CAF50;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #4CAF50;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #70c745, #4CAF50);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: #4CAF50;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #4CAF50;
+            transition: all 0.3s ease;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 50px;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px;
             text-align: center;
-            border-radius: 15px 15px 0 0;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4CAF50 0%, #70c745 50%, #66bb6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #000000;
+            margin-bottom: 50px;
+            font-weight: 400;
+        }
+
+        /* SEARCH BOX */
+        .search-container {
+            margin-bottom: 60px;
             position: relative;
         }
 
-        .moveable-list-wrapper {
-            overflow-y: auto;
-            height: calc(100% - 70px);
-            padding: 0 10px;
+        .search-box {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 50px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(112, 199, 69, 0.2);
         }
 
-        .moveable-list {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+        .search-box:hover,
+        .search-box:focus-within {
+            border-color: #4CAF50;
+            box-shadow: 0 10px 40px rgba(112, 199, 69, 0.2);
+            transform: translateY(-2px);
         }
 
-        .moveable-list li {
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
+        .search-box input {
+            flex: 1;
+            padding: 20px 30px;
+            background: transparent;
+            border: none;
+            color: #000000;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
         }
 
-        .moveable-list li:last-child {
-            border-bottom: none;
+        .search-box input::placeholder {
+            color: #000000;
+            opacity: 0.6;
         }
 
-        .moveable-list li:hover {
-            background-color: #f0f0f0;
+        .search-box button {
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #4CAF50 0%, #70c745 100%);
+            border: none;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
         }
 
-        .vertical-tag {
+        .search-box button:hover {
+            background: linear-gradient(135deg, #3d9140 0%, #5db835 100%);
+            transform: scale(1.05);
+        }
+
+        /* FEATURE CARDS */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .feature-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #4CAF50;
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 50px rgba(112, 199, 69, 0.2);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #4CAF50, #70c745);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: #ffffff;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #2d3748;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .feature-card p {
+            color: #000000;
+            line-height: 1.6;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* QUOTE SECTION */
+        .quote-section {
+            max-width: 800px;
+            margin: 80px auto 0;
+            padding: 50px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote-text {
+            font-size: 22px;
+            font-style: italic;
+            color: #000000;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .quote-author {
+            font-size: 18px;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+
+        .quote-controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .quote-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #4CAF50, #70c745);
+            border: none;
+            border-radius: 50px;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .quote-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(112, 199, 69, 0.3);
+        }
+
+        .quote-btn.icon-only {
+            padding: 12px;
+            width: 45px;
+            height: 45px;
+            justify-content: center;
+        }
+
+        /* PLANT LIST PANEL */
+        .plant-list-panel {
             position: fixed;
-            bottom: 1%;
-            right: 9px;
-            background-color: #4CAF50;
-            color: white;
-            padding: 5px;
-            font-size: 19px;
-            white-space: nowrap;
+            right: -350px;
+            top: 100px;
+            width: 320px;
+            max-height: 70vh;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px 0 0 20px;
+            padding: 30px 20px;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 999;
+            border: 2px solid #e2e8f0;
+        }
+
+        .plant-list-panel.open {
+            right: 0;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .panel-header h3 {
+            color: #4CAF50;
+            font-size: 20px;
+        }
+
+        .close-panel {
+            background: none;
+            border: none;
+            color: #718096;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-panel:hover {
+            color: #4CAF50;
+        }
+
+        .plant-list {
+            list-style: none;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .plant-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .plant-list::-webkit-scrollbar-track {
+            background: #f7fafc;
+            border-radius: 10px;
+        }
+
+        .plant-list::-webkit-scrollbar-thumb {
+            background: #4CAF50;
+            border-radius: 10px;
+        }
+
+        .plant-list li {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: #f7fafc;
             border-radius: 10px;
             cursor: pointer;
-            z-index: 20;
-            animation: jump 1s infinite;
-            transition: opacity 0.3s;
-        }
-        @keyframes jump {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-30px);
-            }
-        }
-        .vertical-tag.hidden {
-            opacity: 0;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
         }
 
-        .close-button {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            cursor: pointer;
+        .plant-list li:hover {
+            background: #e6f7e6;
+            border-color: #4CAF50;
+            transform: translateX(-5px);
+        }
+
+        .plant-list li a {
+            color: #2d3748;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+
+        .toggle-panel-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4CAF50, #70c745);
+            border: none;
+            border-radius: 50%;
+            color: #ffffff;
             font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 25px rgba(112, 199, 69, 0.4);
+            transition: all 0.3s ease;
+            z-index: 998;
+            animation: pulse 2s infinite;
         }
 
-        .vertical-tag1 {
-    position: fixed;
-    top: 60%;
-    left: 40px;
-    transform: translateY(-50%) rotate(-90deg);
-    transform-origin: left bottom;
-    background-color: #4CAF50;
-    color: white;
-    padding: 5px;
-    font-size: 19px;
-    white-space: nowrap;
-}
-
-
-/* Home section */
-.home {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Adjust height as needed */
-    color: white; /* Text color */
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow: hidden;
-    font-family: 'Comic Sans MS', cursive, sans-serif; /* Apply Comic Sans MS font */
-}
-
-/* Search bar styling */
-.search-bar {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    margin-right: 5px;
-    border-radius: 50px;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    font-size: 16px;
-    box-shadow: 0 4px 12px rgba(26, 25, 25, 0.2); /* Black shadow effect */
-    position: relative; /* Enable positioning context */
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-    .search-bar {
-        font-size: 10px; /* Adjust font size for tablets */
-        padding: 7px; /* Adjust padding for tablets */
-        margin-right: 10px; /* Adjust margin for tablets */
-    }
-}
-
-@media (max-width: 480px) {
-    .search-bar {
-        font-size: 5px; /* Further adjust font size for mobile phones */
-        padding: 6px; /* Further adjust padding for mobile phones */
-        margin-right: 15px; /* Further adjust margin for mobile phones */
-    }
-}
-
-
-.search-bar input {
-    width: 100%; /* Ensure input takes full width */
-    height: 50px;
-    border: none;
-    font-size: 12px;
-    padding: 0 13px; /* Add padding for better appearance */
-}
-
-#searchInput {
-    border-radius: 50px;
-}
-
-
-.search-bar button {
-    position: absolute; /* Position button absolutely */
-    right: 0; /* Align button to the right */
-    top: 1; /* Align button to the top */
-    height: 50px; /* Match button height with input */
-    border: none;
-    background-color: #4CAF50; /* Matching the color with home-content button */
-    color: white;
-    cursor: pointer;
-    border-radius: 0 50px 50px 0;
-    font-size: 16px;
-    padding: 1px 13px; /* Remove padding from top and bottom */
-}
-
-.search-bar button:hover {
-    background-color: #45a049; /* Hover effect */
-}
-
-
-@media (max-width: 100px) {
-    .search-bar {
-        flex-direction: column; /* Stack vertically on small screens */
-    }
-
-    .search-bar input,
-    .search-bar button {
-        width: 100%; /* Full width on small screens */
-        border-radius: 50px; /* Fully rounded corners on small screens */
-    }
-
-    .search-bar button {
-        margin-top: 5px; /* Space between input and button */
-    }
-}
-
-
-/* Home-content styling */
-.home-content {
-    max-width: 550px; /* Adjust max-width as needed */
-    width: 80%;
-    height: 70%;
-    margin-top: 3%;
-    animation: fadeIn 1s ease-in-out;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white; /* Ensure text color is white */
-    position: relative;
-    background: rgba(0, 0, 0, 0.2); /* Transparent black background */
-    padding: 20px; /* Padding inside the shadow box */
-    border-radius: 25px; /* Rounded corners */
-    box-shadow: 0 4px 12px rgba(26, 25, 25, 0.2); /* Black shadow effect */
-    box-sizing: border-box;
-}
-
-/* Logo frame inside home-content */
-.home-content::before {
-    content: ""; /* Required to make the pseudo-element display */
-    position: absolute;
-    top: -45px; /* Position above the border of home-content */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px; /* Default size */
-    height: 100px; /* Default size */
-    background-image: url('img/core-img/PLANTINFO.png'); /* Replace with your image URL */
-    background-size: 80%; /* Default size of the background image */
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: rgb(167, 249, 152); /* White background for the circle */
-    border-radius: 50%; /* Make the frame circular */
-    border: 5px solid rgb(23, 163, 23); /* Green border color */
-    box-shadow: 0 4px 12px rgba(26, 25, 25, 0.2); /* Add shadow to the circle */
-    z-index: 0; /* Ensure the element stays above others */
-    background-clip: padding-box; /* Optional: ensures the background does not cover the border */
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-    .home-content::before {
-        width: 80px; /* Adjust size for mobile */
-        height: 80px; /* Adjust size for mobile */
-        top: -35px; /* Adjust position for mobile */
-        background-size: 70%; /* Adjust background image size for mobile */
-    }
-}
-
-@media (max-width: 480px) {
-    .home-content::before {
-        width: 70px; /* Further adjust size for smaller screens */
-        height: 70px; /* Further adjust size for smaller screens */
-        top: -28px; /* Further adjust position for smaller screens */
-        background-size: 60%; /* Further adjust background image size for smaller screens */
-    }
-}
-
-
-
-
-/* Image styling */
-.home-content img {
-    max-width: 80px; /* Adjust size as needed */
-    vertical-align: middle;
-}
-
-/* Button box styling */
-.btn-box {
-    margin-top: 30px;
-}
-
-.btn-box a {
-    text-decoration: none;
-    color: white; /* Text color in button */
-    background-color: #4CAF50; /* Green background for the button */
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-family: Comic Sans MS, Georgia, 'Times New Roman', Times, serif; /* Comic Sans MS font */
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-box a:hover {
-    background-color: #154608; /* Darker green for hover effect */
-}
-
-/* Fade-in animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* Heading styling */
-h1 {
-    font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Apply Comic Sans MS font */
-    color: #ffffff; /* Text color */
-    text-align: center;
-    margin-bottom: 10px; /* Add some space below the title */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Add subtle shadow to text */
-    font-size: 26px; /* Default font size */
-    line-height: 1.3; /* Line height for readability */
-    position: relative; /* Ensure positioning for icons */
-    display: inline-block;
-    padding: 0 30px; /* Add padding to make room for the icons */
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 22px; /* Adjust font size for tablets */
-        padding: 0 20px; /* Adjust padding for tablets */
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 18px; /* Further adjust font size for mobile phones */
-        padding: 0 10px; /* Further adjust padding for mobile phones */
-    }
-}
-
-
-/* Add quotes before and after the h1 text */
-h1:before, h1:after {
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    color: #ffffff; /* Icon color */
-    position: absolute;
-    top: 40%;
-    transform: translateY(-50%);
-    font-size: 0.9em; /* Adjust the size of the icons */
-}
-
-h1:before {
-    content: "\f10d"; /* Unicode for left quote icon */
-    left: 0;
-}
-
-h1:after {
-    content: "\f10e"; /* Unicode for right quote icon */
-    right: 0;
-}
-
-/* Center the h1 within the .home-content */
-.home-content h1 {
-    margin-top: 10%; /* Remove default top margin */
-}
-
-/* Modal styling */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 13;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: max-content;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-height: 80vh;
-    overflow: auto;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-}
-
-.close {
-    color: #555353;
-    float: right;
-    font-size: 38px;
-    font-weight: bold;
-    z-index: 12;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#results {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    overflow-x: auto;  /* Enable horizontal scrolling if needed */
-    gap: 20px;         /* Space between items */
-    padding: 10px;     /* Padding inside the container */
-    justify-content: first baseline; /* Center items horizontally */
-    margin: 0;         /* Remove default margins */
-}
-
-.plant-card {
-    flex: 0 0 auto;
-    width: 250px;
-    height: 400px;
-    background-color: white;
-    border: 2px solid #000000;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden; /* Hide overflow to ensure scrollable details only */
-    transition: transform 0.3s, opacity 0.3s, box-shadow 0.7s;
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.plant-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    transform: translateY(0);
-}
-
-.plant-card img {
-    max-width: 200px;
-    width: 100%; /* Increase image width to fill the card width */
-    height: 150px; /* Increase height of the image */
-    object-fit: cover; /* Maintain aspect ratio and ensure the image covers the area */
-    image-rendering: -webkit-optimize-contrast; /* Optimize for better contrast and sharpness */
-    image-rendering: crisp-edges; /* Keep edges sharp, reducing blurriness */
-    image-rendering: pixelated; /* Further sharpen when scaled */
-    filter: none; /* Ensure no blur filter is applied */
-}
-
-/* Image Modal styling */
-.image-modal {
-    display: none;
-    position: fixed;
-    z-index: 14;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-}
-
-.image-modal-content {
-    position: relative;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    max-width: 90%;
-    max-height: 90%;
-    width: 500px; /* Adjust width for larger display */
-    height: 500px; /* Allow height to adjust automatically */
-}
-
-.image-modal-content img {
-    max-width: 100%;
-    max-height: 100%;
-    width: 490px; /* Adjust width for larger display */
-    height: 490px;
-    border-radius: 10px;
-}
-
-.image-modal .close {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    color: #f40000;
-    font-size: 38px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.image-modal .close:hover,
-.image-modal .close:focus {
-    color: black;
-    text-decoration: none;
-}
-
-
-.details {
-    padding: 10px; /* Increase padding for better spacing */
-    height: 200px; /* Increase height of the details section */
-    overflow-y: auto; /* Allow vertical scrolling if content overflows */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.details h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #333;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.details p {
-    margin: 5px 0;
-    color: #666;
-    font-size: 14px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.details a {
-    color: #4CAF50;
-    text-decoration: none;
-    font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.details a:hover {
-    text-decoration: underline;
-}
-
-.not-found {
-    color: red;
-    text-align: center;
-}
-
-.wrapper,
-.favorite-container {
-    max-width: 600px; /* Adjust max-width as needed */
-    width: 100%;
-    position: absolute;
-    transform: translateX(-50%); /* Center horizontally */
-    top: 7%; /* Distance from the top */
-    left: 50%; /* Center horizontally */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 10px; /* Adjust padding as needed */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Black shadow effect */
-    border-radius: 1em;
-    background-color: black; /* Black background color */
-    color: white; /* White text color */
-    text-align: center; /* Center text horizontally */
-
-    /* New properties to add scrollable feature */
-    max-height: 400px; /* Adjust this value to control when the scroll appears */
-    overflow-y: auto; /* Enables scrolling only when content overflows */
-}
-
-.qcontainer {
-  height: 100px;
-  margin-top: 110px;
-}
-
-/* Default styling for .qcontainer paragraph and heading */
-.qcontainer p {
-  padding-top: 10px;
-  color: yellow;
-  font-size: 17px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.qcontainer h3 {
-  color: rgb(255, 255, 255);
-  font-size: large;
-  text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-  .qcontainer p {
-    font-size: 15px; /* Adjust font size for tablets */
-    padding-top: 8px; /* Adjust padding for tablets */
-  }
-
-  .qcontainer h3 {
-    font-size: 22px; /* Adjust font size for tablets */
-  }
-}
-
-@media (max-width: 480px) {
-  .qcontainer p {
-    font-size: 13px; /* Further adjust font size for mobile phones */
-    padding-top: 6px; /* Further adjust padding for mobile phones */
-  }
-
-  .qcontainer h3 {
-    font-size: 18px; /* Further adjust font size for mobile phones */
-  }
-}
-
-.favorite-container {
-    background-color: black;
-    color: white; /* Optional: Ensures text is visible on the black background */
-}
-
-
-.favorite-container button {
-  background-color: #4CAF50;
-  border-radius: 3em;
-  margin-left: 0px;
-  border: 2px solid #ffffff; /* White border */
-  color: #ffffff;
-  padding: 10px 20px; /* Padding for better spacing */
-  font-size: 15px; /* Adjust font size */
-}
-
-/* Default styling for .button-container and its buttons */
-.button-container {
-  margin-top: -100px; /* Adjust as needed */
-  margin-left: 10px;
-}
-
-.button-container button {
-  background-color: transparent;
-  border: 2px solid #ffffff; /* White border */
-  color: #ffffff;
-  font-size: 15px; /* Default font size */
-  padding: 8px 16px; /* Padding for better appearance */
-  border-radius: 3px; /* Slight rounding to corners */
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-  .button-container {
-    margin-top: -80px; /* Adjust margin for tablets */
-    margin-left: 8px; /* Adjust margin-left for tablets */
-  }
-
-  .button-container button {
-    font-size: 14px; /* Adjust font size for tablets */
-    padding: 7px 14px; /* Adjust padding for tablets */
-  }
-}
-
-@media (max-width: 480px) {
-  .button-container {
-    margin-top: -60px; /* Further adjust margin for mobile phones */
-    margin-left: 5px; /* Further adjust margin-left for mobile phones */
-  }
-
-  .button-container button {
-    font-size: 12px; /* Further adjust font size for mobile phones */
-    padding: 6px 12px; /* Further adjust padding for mobile phones */
-  }
-}
-
-
-.favorite-container h6 {
-  color: #ffe600;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 20px;
-}
-
-.favorite-container ul {
-  list-style: none;
-  color: #ffffff; /* Yellow-green text */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.favorite-container li {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 1em 0;
-}
-
-.active {
-  color: red;
-}
-
-.map-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.8); /* Black with opacity */
-}
-
-/* Modal Content */
-.map-modal-content {
-    position: relative;
-    margin: auto;
-    padding: 0;
-    width: 80%; /* Width for desktop */
-    height: 80%; /* Height for desktop to make it square */
-    top: 70px; /* Move the map content down by 70px */
-    box-sizing: border-box;
-    max-width: 600px; /* Ensure it doesn't exceed 600px width */
-    max-height: 600px; /* Ensure it doesn't exceed 600px height */
-}
-
-/* Modal for smaller screens like mobile/tablet */
-@media screen and (max-width: 768px) {
-    .map-modal-content {
-        width: 75%;  /* Adjusted width for mobile, keeping it square */
-        height: 75%; /* Matching height for a square shape */
-        top: 50px;   /* Shift down by 50px */
-        max-width: 400px; /* Ensure it doesn't exceed 400px width */
-        max-height: 400px; /* Ensure it doesn't exceed 400px height */
-    }
-}
-
-/* For very small screens (mobile portrait) */
-@media screen and (max-width: 480px) {
-    .map-modal-content {
-        width: 80%; /* Adjusted width for small screens */
-        height: 80%; /* Matching height for a square shape */
-        top: 40px;   /* Shift down by 40px */
-        max-width: 300px; /* Ensure it doesn't exceed 300px width */
-        max-height: 300px; /* Ensure it doesn't exceed 300px height */
-    }
-}
-
-
-.close {
-    color: rgb(255, 0, 0); /* Close button color */
-    position: absolute;
-    top: 0px;
-    right: 10px;
-    font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: #000000; /* Change color on hover */
-    text-decoration: none;
-    cursor: pointer;
-}
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 5px 25px rgba(112, 199, 69, 0.4);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 10px 40px rgba(112, 199, 69, 0.6);
+            }
+        }
+
+        .toggle-panel-btn:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* MODALS */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid #e2e8f0;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 36px;
+            color: #718096;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            color: #4CAF50;
+            transform: rotate(90deg);
+        }
+
+        .results-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding: 20px 10px;
+        }
+
+        .results-container::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .results-container::-webkit-scrollbar-track {
+            background: #f7fafc;
+            border-radius: 10px;
+        }
+
+        .results-container::-webkit-scrollbar-thumb {
+            background: #4CAF50;
+            border-radius: 10px;
+        }
+
+        .plant-card {
+            min-width: 300px;
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .plant-card:hover {
+            transform: translateY(-5px);
+            border-color: #4CAF50;
+            box-shadow: 0 10px 40px rgba(112, 199, 69, 0.2);
+        }
+
+        .plant-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .plant-card img:hover {
+            transform: scale(1.05);
+        }
+
+        .plant-details {
+            padding: 25px;
+        }
+
+        .plant-details h2 {
+            color: #4CAF50;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .plant-details p {
+            color: #718096;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .plant-details strong {
+            color: #2d3748;
+        }
+
+        .plant-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .plant-link {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #4CAF50, #70c745);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .plant-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(112, 199, 69, 0.3);
+        }
+
+        .not-found {
+            text-align: center;
+            color: #e53e3e;
+            font-size: 18px;
+            padding: 40px;
+        }
+
+        /* IMAGE MODAL */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2001;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .image-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .image-modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* MAP MODAL */
+        .map-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2002;
+            padding: 40px;
+        }
+
+        .map-modal-content {
+            width: 100%;
+            max-width: 900px;
+            height: 80vh;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #4CAF50;
+        }
+
+        /* FAVORITE CONTAINER */
+        .favorite-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 2003;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .favorite-container h6 {
+            color: #4CAF50;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .favorite-container ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .favorite-container li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f7fafc;
+            border-radius: 10px;
+            color: #718096;
+            border: 1px solid #e2e8f0;
+        }
+
+        .favorite-container button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #4CAF50, #70c745);
+            border: none;
+            border-radius: 50px;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .favorite-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(112, 199, 69, 0.3);
+        }
+
+        /* PRELOADER */
+        .preloader {
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 50%, #f0fff4 100%);
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .preloader-circle {
+            width: 80px;
+            height: 80px;
+            border: 3px solid transparent;
+            border-top-color: #4CAF50;
+            border-bottom-color: #70c745;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .preloader-img {
+            position: absolute;
+        }
+
+        .preloader-img img {
+            width: 45px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 42px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 250px;
+                height: calc(100vh - 70px);
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 30px 20px;
+                gap: 20px;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
+
+            .plant-list-panel {
+                width: 280px;
+                right: -280px;
+            }
+
+            .quote-section {
+                padding: 30px 20px;
+            }
+
+            .quote-text {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .search-box input {
+                padding: 15px 20px;
+                font-size: 14px;
+            }
+
+            .search-box button {
+                padding: 15px 25px;
+                font-size: 14px;
+            }
+
+            .modal-content {
+                padding: 25px 20px;
+            }
+        }
     </style>
 </head>
 
@@ -841,94 +1022,168 @@ h1:after {
         </div>
     </div>
 
-    <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
+    <!-- Animated Background Particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
 
-        <!-- ***** Navbar Area ***** -->
-        <div class="alazea-main-menu">
-            <div class="classy-nav-container breakpoint-off">
-                <div class="container">
-                    <!-- Menu -->
-                    <nav class="classy-navbar" id="alazeaNav">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="Plant Codex">
+                <span>Plant Codex</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="database.html"><i class="fas fa-database"></i> Database</a></li>
+                <li><a href="caretips.html"><i class="fas fa-leaf"></i> Care Tips</a></li>
+                <li><a href="service.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-                        <!-- Nav Brand -->
-                        <!-- <a href="index.html" class="collegelogo"><img src="img/core-img/logoheade.png" alt=""></a> -->
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Plant Codex</h1>
+            <p class="hero-subtitle">Discover the wonders of nature, one plant at a time</p>
 
-                        <!-- Navbar Toggler -->
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
-                        </div>
+            <!-- Search Box -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search for any plant...">
+                    <button onclick="searchPlants()"><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
 
-                        <!-- Menu -->
-                        <div class="classy-menu">
 
-                            <!-- Close Button -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                            </div>
 
-                           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-                            <!-- Navbar Start -->
-                            <div class="classynav">
-                                <ul>
-                                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                                    <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
-                                    <li><a href="service.html"><i class="fas fa-cogs"></i> Services</a></li>
-                                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
-                                    <li><a href="donate.html" target="_blank"><i class="fa-solid fa-tree"></i>Donate Plant</a></li>
-                                </ul>
-                            </div>  
+            <!-- Quote Section -->
+            <div class="quote-section">
+                <p id="quote" class="quote-text">Plants give us oxygen for the lungs and for the soul.</p>
+                <p id="author" class="quote-author">Terri Guillemets</p>
+                <div class="quote-controls">
+                    <button id="btn" class="quote-btn"><i class="fas fa-sync-alt"></i> New Quote</button>
+                    <button id="copy" class="quote-btn icon-only"><i class="fas fa-copy"></i></button>
+                    <button id="favourite" class="quote-btn icon-only"><i class="fa-regular fa-heart"></i></button>
+                    <button id="show-list" class="quote-btn icon-only"><i class="fas fa-list"></i></button>
                 </div>
             </div>
         </div>
-    </header>
-    <!-- ##### Header Area End ##### -->
-    <!-- Toggle Button -->
-    <div class="vertical-tag" id="toggle-button">List of Plants<img src="img/core-img/PLANTINFO.png" width="40px"></div>
+    </section>
 
-    <!-- Moveable List Container -->
-    <div class="moveable-list-container" id="plant-container">
-        <div class="moveable-list-header">
-            List of Plants
-            <span class="close-button" id="close-button">&times;</span>
+    <!-- Plant List Panel -->
+    <div class="plant-list-panel" id="plant-panel">
+        <div class="panel-header">
+            <h3>Plant Directory</h3>
+            <button class="close-panel" id="close-panel">&times;</button>
         </div>
-        <div class="moveable-list-wrapper" id="moveable-list-wrapper">
-            <ul class="moveable-list" id="plant-list">
-                <!-- Plant names will be dynamically added here -->
-            </ul>
+        <ul class="plant-list" id="plant-list"></ul>
+    </div>
+
+    <!-- Toggle Panel Button -->
+    <button class="toggle-panel-btn" id="toggle-panel"><i class="fas fa-list-ul"></i></button>
+
+    <!-- Search Results Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="results" class="results-container"></div>
         </div>
     </div>
 
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <div class="image-modal-content">
+            <button class="modal-close" onclick="closeImageModal()">&times;</button>
+            <img id="modalImage" src="" alt="Plant Image">
+        </div>
+    </div>
+
+    <!-- Map Modal -->
+    <div id="mapModal" class="map-modal">
+        <div class="map-modal-content">
+            <button class="modal-close" onclick="closeMapModal()">&times;</button>
+            <div id="mapContainer" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+
+    <!-- Favorite Container -->
+    <div class="favorite-container">
+        <h6>Favorite Quotes</h6>
+        <ul id="list-of-favourite-quotes"></ul>
+        <button id="close-favorite">Close</button>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/plugins.js"></script>
+    <script src="js/active.js"></script>
+
     <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Plant list panel toggle
+        const togglePanel = document.getElementById('toggle-panel');
+        const plantPanel = document.getElementById('plant-panel');
+        const closePanel = document.getElementById('close-panel');
+
+        togglePanel.addEventListener('click', () => {
+            plantPanel.classList.add('open');
+        });
+
+        closePanel.addEventListener('click', () => {
+            plantPanel.classList.remove('open');
+        });
+
+        // Load plant list from Excel
         document.addEventListener('DOMContentLoaded', () => {
             const plantList = document.getElementById('plant-list');
-            const listWrapper = document.getElementById('moveable-list-wrapper');
             const searchInput = document.getElementById('searchInput');
-            const searchButton = document.querySelector('.search-bar button');
-            const toggleButton = document.getElementById('toggle-button');
-            const plantContainer = document.getElementById('plant-container');
-            const closeButton = document.getElementById('close-button');
+            const searchButton = document.querySelector('.search-box button');
 
-            toggleButton.addEventListener('click', () => {
-                plantContainer.style.right = '10px';
-                toggleButton.classList.add('hidden');
-            });
-
-            closeButton.addEventListener('click', () => {
-                plantContainer.style.right = '-220px';
-                toggleButton.classList.remove('hidden');
-            });
-
-            // Fetch and read the Excel file
             fetch('plantnames.xlsx')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.arrayBuffer();
-                })
+                .then(response => response.arrayBuffer())
                 .then(data => {
                     const workbook = XLSX.read(data, { type: 'array' });
                     const sheetName = workbook.SheetNames[0];
@@ -938,528 +1193,285 @@ h1:after {
                     const startRow = parseInt(startCell.replace(/\D/g, ''));
                     const endRow = parseInt(endCell.replace(/\D/g, ''));
 
-                    plantList.innerHTML = ''; // Clear existing list items
-
                     for (let row = startRow; row <= endRow; row++) {
                         const cellAddress = `A${row}`;
                         const cell = sheet[cellAddress];
                         if (cell && cell.v) {
                             const listItem = document.createElement('li');
                             const listItemLink = document.createElement('a');
-                            listItemLink.href = '#'; // Prevent default link behavior
+                            listItemLink.href = '#';
                             listItemLink.textContent = cell.v;
                             listItemLink.addEventListener('click', (event) => {
                                 event.preventDefault();
                                 searchInput.value = cell.v;
-                                searchButton.click(); // Simulate button click to search
+                                searchButton.click();
+                                plantPanel.classList.remove('open');
                             });
                             listItem.appendChild(listItemLink);
                             plantList.appendChild(listItem);
                         }
                     }
-
-                    let isUserScrolling = false;
-                    let autoScrollInterval;
-                    let scrollTop = 0;
-                    const scrollSpeed = 1; // Adjust the scrolling speed
-
-                    function startAutoScroll() {
-                        autoScrollInterval = setInterval(() => {
-                            if (!isUserScrolling) {
-                                scrollTop += scrollSpeed;
-                                if (scrollTop > plantList.scrollHeight) {
-                                    scrollTop = 0; // Reset scroll position
-                                }
-                                listWrapper.scrollTop = scrollTop; // Move list up
-                            }
-                        }, 20); // Adjust the interval for smooth scrolling
-                    }
-
-                    listWrapper.addEventListener('scroll', () => {
-                        isUserScrolling = true; // Pause auto-scrolling
-                    });
-
-                    listWrapper.addEventListener('mouseup', () => {
-                        isUserScrolling = false; // Resume auto-scrolling when user stops scrolling
-                    });
-
-                    listWrapper.addEventListener('mouseleave', () => {
-                        isUserScrolling = false; // Resume auto-scrolling when mouse leaves
-                    });
-
-                    startAutoScroll(); // Start the auto-scrolling
                 })
-                .catch(error => console.error('Error fetching or processing the file:', error));
+                .catch(error => console.error('Error loading plant list:', error));
+
+            // Enter key search
+            searchInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    searchPlants();
+                }
+            });
+
+            // Load plant data
+            fetch('https://gist.githubusercontent.com/SahilD06/1ea5dbae8c37b2917d6fe345d10dbaf1/raw/74fcb00d739ff7b16f5f7f01dddf61921944153d/plant_data.tsv')
+                .then(response => response.text())
+                .then(data => {
+                    const plants = parseCSV(data);
+                    window.plants = plants;
+                })
+                .catch(error => console.error('Error fetching plant data:', error));
+        });
+
+        function parseCSV(data) {
+            const lines = data.trim().split('\n');
+            // Skip the first line (header)
+            return lines.slice(1).map(line => {
+                // Split by Tab
+                const fields = line.split('\t');
+
+                // Map according to your Gist's column order
+                return {
+                    name: fields[1],              // Common Name
+                    scientificName: fields[2],     // Scientific Name
+                    height: fields[3],             // Height
+                    description: fields[4],        // Description
+                    googleLink: fields[5],         // Information
+                    youtubeLink: fields[6],        // Youtube
+                    type: fields[7],               // Type
+                    location: fields[8],           // Prevalent in
+                    lifespan: fields[9],           // Lifespan
+                    oxygenLevel: fields[10]        // Oxygen production
+                };
+            });
+        }
+
+        function normalizeString(str) {
+            return str.trim().toLowerCase();
+        }
+
+        function capitalizeWords(str) {
+            return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
+
+        function searchPlants() {
+            const searchInput = normalizeString(document.getElementById('searchInput').value);
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+
+            const filteredPlants = window.plants.filter(plant =>
+                normalizeString(plant
+
+                    .name).includes(searchInput)
+            );
+
+            if (filteredPlants.length === 0) {
+                resultsContainer.innerHTML = '<p class="not-found">No plants found</p>';
+                openModal();
+                return;
+            }
+
+            const displayedNames = new Set();
+
+            filteredPlants.forEach((plant, index) => {
+                if (!displayedNames.has(normalizeString(plant.name))) {
+                    displayedNames.add(normalizeString(plant.name));
+
+                    const imageName = capitalizeWords(plant.name) + '.jpg';
+
+                    const plantCard = document.createElement('div');
+                    plantCard.className = 'plant-card';
+                    plantCard.innerHTML = `
+                        <img src="images/${imageName}" alt="${plant.name}" onclick="openImageModal('images/${imageName}')">
+                        <div class="plant-details">
+                            <h2>${plant.name} (${plant.scientificName})</h2>
+                            <p><strong>Type:</strong> ${plant.type}</p>
+                            <p><strong>Height:</strong> ${plant.height}</p>
+                            <p><strong>Lifespan:</strong> ${plant.lifespan} years</p>
+                            <p><strong>Oxygen Level:</strong> ${plant.oxygenLevel}</p>
+                            <p>${plant.description}</p>
+                            <div class="plant-links">
+                                <a href="${plant.googleLink}" target="_blank" class="plant-link">
+                                    <i class="fas fa-info-circle"></i> More Info
+                                </a>
+                                <a href="${plant.youtubeLink}" target="_blank" class="plant-link">
+                                    <i class="fab fa-youtube"></i> Watch Video
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    resultsContainer.appendChild(plantCard);
+
+                    setTimeout(() => {
+                        plantCard.style.opacity = 1;
+                        plantCard.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+
+            openModal();
+        }
+
+        function openModal() {
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        function openImageModal(imageSrc) {
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('imageModal').style.display = 'flex';
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        function openMapModal(location) {
+            const apiKey = 'AIzaSyC_X8p8OmhmohqVseE0tGn9hb9n6zSeYl4';
+            const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${encodeURIComponent(location.trim())}`;
+
+            const mapContainer = document.getElementById('mapContainer');
+            mapContainer.innerHTML = `<iframe width="100%" height="100%" frameborder="0" style="border:0" src="${mapUrl}" allowfullscreen></iframe>`;
+            document.getElementById('mapModal').style.display = 'block';
+        }
+
+        function closeMapModal() {
+            document.getElementById('mapModal').style.display = 'none';
+            document.getElementById('mapContainer').innerHTML = '';
+        }
+
+        // Quote functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            let quote = document.getElementById('quote');
+            let author = document.getElementById('author');
+            let btn = document.getElementById('btn');
+            let favourite = document.getElementById('favourite');
+            let list = document.getElementById('list-of-favourite-quotes');
+            let copyButton = document.getElementById('copy');
+            let showAllListOfFavourite = document.getElementById('show-list');
+            let favoriteContainer = document.querySelector('.favorite-container');
+            let closeButton = document.getElementById('close-favorite');
+            let favorites = [];
+
+            const quotes = [
+                { content: "The earth has music for those who listen.", author: "William Shakespeare" },
+                { content: "To plant a garden is to believe in tomorrow.", author: "Audre Lorde" },
+                { content: "The best time to plant a tree was 20 years ago. The second-best time is now.", author: "Chinese Proverb" },
+                { content: "In every walk with nature one receives far more than he seeks.", author: "John Muir" },
+                { content: "The creation of a thousand forests is in one acorn.", author: "Ralph Waldo Emerson" },
+                { content: "Nature does not hurry, yet everything is accomplished.", author: "Lao Tzu" },
+                { content: "The earth laughs in flowers.", author: "Ralph Waldo Emerson" },
+                { content: "Trees are the earth's endless effort to speak to the listening heaven.", author: "Rabindranath Tagore" },
+            ];
+
+            const getRandomQuote = () => {
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                return quotes[randomIndex];
+            };
+
+            const updateQuote = (content, authorName) => {
+                quote.innerText = content;
+                author.innerText = authorName;
+                let existsInFavorites = checkExistence(content, authorName);
+                let heartIcon = favourite.firstElementChild;
+                if (existsInFavorites) {
+                    heartIcon.classList.remove('fa-regular');
+                    heartIcon.classList.add('fa-solid', 'active');
+                } else {
+                    heartIcon.classList.add('fa-regular');
+                    heartIcon.classList.remove('fa-solid', 'active');
+                }
+            };
+
+            const displayFavorites = () => {
+                list.innerHTML = '';
+                favorites.forEach((q, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${index + 1}. ${q.content} - ${q.author}`;
+                    list.appendChild(listItem);
+                });
+            };
+
+            const saveFavoritesToLocalStorage = () => {
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            };
+
+            const checkExistence = (content, authorName) => {
+                return favorites.some(q => q.content === content && q.author === authorName);
+            };
+
+            const addToFavorites = () => {
+                let heartIcon = favourite.firstElementChild;
+                const content = quote.innerText;
+                const authorName = author.innerText;
+                const existsInFavorites = checkExistence(content, authorName);
+
+                if (!existsInFavorites) {
+                    favorites.push({ content, author: authorName });
+                    heartIcon.classList.remove('fa-regular');
+                    heartIcon.classList.add('fa-solid');
+                    saveFavoritesToLocalStorage();
+                    displayFavorites();
+                } else {
+                    favorites = favorites.filter(q => !(q.content === content && q.author === authorName));
+                    heartIcon.classList.add('fa-regular');
+                    heartIcon.classList.remove('fa-solid');
+                    saveFavoritesToLocalStorage();
+                    displayFavorites();
+                }
+            };
+
+            const copyToClipboard = (text) => {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Quote copied to clipboard!');
+                });
+            };
+
+            copyButton.addEventListener('click', () => {
+                copyToClipboard(quote.innerText + ' - ' + author.innerText);
+            });
+
+            showAllListOfFavourite.addEventListener('click', () => {
+                if (favorites.length == 0) {
+                    list.innerHTML = "<p>You haven't added a favorite yet</p>";
+                }
+                favoriteContainer.style.display = 'block';
+            });
+
+            closeButton.addEventListener('click', () => {
+                favoriteContainer.style.display = 'none';
+            });
+
+            favourite.addEventListener('click', addToFavorites);
+
+            // Load saved favorites
+            const storedFavorites = localStorage.getItem('favorites');
+            if (storedFavorites) {
+                favorites = JSON.parse(storedFavorites);
+                displayFavorites();
+            }
+
+            // Initial quote
+            const initialQuote = getRandomQuote();
+            updateQuote(initialQuote.content, initialQuote.author);
+
+            btn.addEventListener('click', () => {
+                const newQuote = getRandomQuote();
+                updateQuote(newQuote.content, newQuote.author);
+            });
         });
     </script>
-
-                                <!-- <div class="vertical-tag1">
-                                    <span>A<span> _ </span> College<span> _ </span> Initiative</span>
-                                </div> -->
-
-    <section class="home">
-        <div class="home-content">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-            <h1>Welcome to Flora Files </h1>
-            <div>
-              <div>
-              <!-- Search Bar -->
-              <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search by plant name...">
-                <button onclick="searchPlants()">Search</button>
-            </div>
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal()">&times;</span>
-                    <div id="results"></div>
-                </div>
-            </div>
-            <div id="imageModal" class="image-modal">
-                <div class="image-modal-content">
-                    <span class="close" onclick="closeImageModal()">&times;</span>
-                    <img id="modalImage" src="" alt="Plant Image">
-                </div>
-            </div>  
-            <div id="mapModal" class="map-modal">
-                <div class="map-modal-content">
-                    <span class="close" onclick="closeMapModal()">&times;</span>
-                    <div id="mapContainer" style="width: 100%; height: 80vh;"></div>
-                </div>
-            </div>          
-            </div>
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-    fetch('https://gist.githubusercontent.com/Carolpillai/a55e403e7745d5a7747c2e5cb716b1a7/raw/7ad2351e229c3fef5346435096935d9eff0165d3/plant.txt')
-        .then(response => response.text())
-        .then(data => {
-            const plants = parseCSV(data);
-            window.plants = plants;
-        })
-        .catch(error => console.error('Error fetching the CSV data:', error));
-
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            searchPlants();
-        }
-    });
-});
-
-function parseCSV(data) {
-    return data.trim().split('\n').map(line => {
-        const [name, scientificName, type, height, lifespan, oxygenLevel, description, googleLink, youtubeLink, location] = line.split('\t');
-        return { name, scientificName, type, height, lifespan, oxygenLevel, description, googleLink, youtubeLink, location };
-    });
-}
-
-function normalizeString(str) {
-    return str.trim().toLowerCase();
-}
-
-function capitalizeWords(str) {
-    return str
-        .toLowerCase()
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-}
-
-function searchPlants() {
-    const searchInput = normalizeString(document.getElementById('searchInput').value);
-    const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = '';
-
-    const filteredPlants = window.plants.filter(plant =>
-        normalizeString(plant.name).includes(searchInput)
-    );
-
-    if (filteredPlants.length === 0) {
-        resultsContainer.innerHTML = '<p class="not-found">No plants found</p>';
-        openModal();
-        return;
-    }
-
-    const displayedNames = new Set();
-
-    filteredPlants.forEach((plant, index) => {
-        if (!displayedNames.has(normalizeString(plant.name))) {
-            displayedNames.add(normalizeString(plant.name));
-
-            // Use a high-resolution image
-            const imageName = capitalizeWords(plant.name) + '.jpg';
-
-            const plantCard = document.createElement('div');
-            plantCard.className = 'plant-card';
-            plantCard.innerHTML = `
-                <img src="images/${imageName}" alt="${plant.name}" onclick="openImageModal('images/${imageName}')">
-                <div class="details">
-    <h2>${plant.name} (${plant.scientificName})</h2>
-    <p><strong>Type:</strong> ${plant.type}</p>
-    <p><strong>Height:</strong> ${plant.height}</p>
-    <p><strong>Lifespan:</strong> ${plant.lifespan} years</p>
-    <p><strong>Oxygen Level:</strong> ${plant.oxygenLevel}</p>
-    <p>${plant.description}</p>
-
-    <!-- Link to more info (Google) -->
-    <p>
-        <a href="${plant.googleLink}" target="_blank" style="color: darkgreen; font-weight: bold; text-decoration: none; border-bottom: 2px solid darkgreen; padding-bottom: 2px; margin-left: 20px;">
-            More Info
-        </a>
-    </p>
-
-    <!-- Link to YouTube video (if available) -->
-    <p>
-        <a href="${plant.youtubeLink}" target="_blank" style="color: darkred; font-weight: bold; text-decoration: none; border-bottom: 2px solid darkred; padding-bottom: 2px; margin-left: 20px;">
-            Watch Video
-        </a>
-    </p>
-
-    <!-- Paragraph with clickable text for map location -->
-    <p style="color: blue; font-weight: bold; cursor: pointer; text-decoration: underline; margin-left: 20px;" 
-       onclick="openMapModal('${plant.location}')">
-       Mostly Found in ${plant.location}
-    </p>
-</div>
-
-            `;
-            resultsContainer.appendChild(plantCard);
-
-            setTimeout(() => {
-                plantCard.style.opacity = 1;
-                plantCard.style.transform = 'translateY(0)';
-            }, index * 100);
-        }
-    });
-
-    openModal();
-}
-
-
-function openModal() {
-    document.getElementById('myModal').style.display = 'flex';
-}
-
-function closeModal() {
-    document.getElementById('myModal').style.display = 'none';
-}
-
-function openImageModal(imageSrc) {
-    document.getElementById('modalImage').src = imageSrc;
-    document.getElementById('imageModal').style.display = 'flex';
-}
-
-function closeImageModal() {
-    document.getElementById('imageModal').style.display = 'none';
-}
-
-function openMapModal(location) {
-    const apiKey = 'AIzaSyC_X8p8OmhmohqVseE0tGn9hb9n6zSeYl4'; // Replace this with your actual API key
-    const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${encodeURIComponent(location.trim())}`;
-    
-    // Log the map URL for debugging
-    console.log("Map URL: ", mapUrl);
-    
-    const mapContainer = document.getElementById('mapContainer');
-    mapContainer.innerHTML = `<iframe width="100%" height="100%" frameborder="0" style="border:0" src="${mapUrl}" allowfullscreen></iframe>`;
-    
-    // Check if mapContainer is available before displaying the modal
-    if (mapContainer) {
-        document.getElementById('mapModal').style.display = 'block';
-    } else {
-        console.error('Map container not found.');
-    }
-}
-
-
-function closeMapModal() {
-    document.getElementById('mapModal').style.display = 'none';
-    document.getElementById('mapContainer').innerHTML = ''; // Clear the map when closing
-}
-
-            </script>
-            
-            </div>
-            <div>
-                <div class="qcontainer">
-                    <div class="button-container">
-                        <button id="favourite"><i class="fa-regular fa-heart"></i></button>
-                        <button id="show-list">
-                            <i class="fa-solid fa-list"></i>
-                        </button>
-                        <button id="copy"><i class="fa-solid fa-copy"></i></button>
-                        <button id="btn">New One</button>
-                    </div>
-                    <p id="quote">Plants give us oxygen for the lungs and for the soul.</p>
-                    <h3 id="author">Terri Guillemets</h3>
-                </div>
-                <div class="favorite-container">
-                    <h6>Favorite Quotes</h6>
-                    <ul id="list-of-favourite-quotes"></ul>
-                    <button id="close-favorite">Close</button>
-                </div>
-            </div>
-        
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    let quote = document.getElementById('quote');
-                    let author = document.getElementById('author');
-                    let btn = document.getElementById('btn');
-                    let favourite = document.getElementById('favourite');
-                    let list = document.getElementById('list-of-favourite-quotes');
-                    let copyButton = document.getElementById('copy');
-                    let showAllListOfFavourite = document.getElementById('show-list');
-                    let clearButton = document.getElementById('clear-button');
-                    let favoriteContainer = document.querySelector('.favorite-container');
-                    let closeButton = document.getElementById('close-favorite');
-                    let favorites = [];
-        
-                    const quotes = [
-    { content: "The earth has music for those who listen.", author: "William Shakespeare" },
-    { content: "To plant a garden is to believe in tomorrow.", author: "Audre Lorde" },
-    { content: "The best time to plant a tree was 20 years ago. The second-best time is now.", author: "Chinese Proverb" },
-    { content: "Gardening is the most therapeutic and defiant act you can do against the forces of death and destruction.", author: "Doug Green" },
-    { content: "The creation of a thousand forests is in one acorn.", author: "Ralph Waldo Emerson" },
-    { content: "A tree is our most intimate contact with nature.", author: "George Nakashima" },
-    { content: "He who plants a tree plants a hope.", author: "Lucy Larcom" },
-    { content: "The clearest way into the Universe is through a forest wilderness.", author: "John Muir" },
-    { content: "The trees are the earth’s endless effort to speak to the listening heaven.", author: "Rabindranath Tagore" },
-    { content: "A society grows great when people plant trees whose shade they know they shall never sit in.", author: "Greek Proverb" },
-    { content: "To sit in the shade on a fine day and look upon verdure is the most perfect refreshment.", author: "Jane Austen" },
-    { content: "The best friend on earth of man is the tree. When we use the tree respectfully and economically, we have one of the most sustainable resources on the planet.", author: "Frank Lloyd Wright" },
-    { content: "In every walk with nature one receives far more than he seeks.", author: "John Muir" },
-    { content: "Trees are the lungs of the earth.", author: "Frank Lloyd Wright" },
-    { content: "Nature does not hurry, yet everything is accomplished.", author: "Lao Tzu" },
-    { content: "A person who plants a tree, plants a hope.", author: "Lucy Larcom" },
-    { content: "I like trees because they seem more resigned to the way they have to live than other things do.", author: "Willa Cather" },
-    { content: "Nature always wears the colors of the spirit.", author: "Ralph Waldo Emerson" },
-    { content: "The earth laughs in flowers.", author: "Ralph Waldo Emerson" },
-    { content: "The love of the wilderness is a deep and profound feeling that will always stay with you.", author: "John Muir" },
-    { content: "A tree is a poem that the earth writes upon the sky.", author: "Khalil Gibran" },
-    { content: "The mountains are calling and I must go.", author: "John Muir" },
-    { content: "Every flower is a soul blossoming in nature.", author: "Gerard De Nerval" },
-    { content: "Nature always wears the colors of the spirit.", author: "Ralph Waldo Emerson" },
-    { content: "The most beautiful gift of nature is that it gives one pleasure to look around and find beauty in all its forms.", author: "Jane Austen" },
-    { content: "Nature never goes out of style.", author: "Unknown" },
-    { content: "The earth has music for those who listen.", author: "William Shakespeare" },
-    { content: "Nature is not a place to visit. It is home.", author: "Gary Snyder" },
-    { content: "The creation of a thousand forests is in one acorn.", author: "Ralph Waldo Emerson" },
-    { content: "The best way to predict the future is to create it.", author: "Peter Drucker" },
-    { content: "A tree's beauty lies in its naturalness, and its grace in its simple elegance.", author: "Unknown" },
-    { content: "Trees are the best friends we can have.", author: "Unknown" },
-    { content: "If you want to be happy for a year, plant a garden; if you want to be happy for life, plant a tree.", author: "Chinese Proverb" },
-    { content: "Nature is not a place to visit. It is home.", author: "Gary Snyder" },
-    { content: "In nature, nothing is perfect and everything is perfect.", author: "Alice Walker" },
-    { content: "The forest is a quiet place if only the best of the best will survive.", author: "Unknown" },
-    { content: "The beauty of the natural world lies in the details.", author: "Natalie Angier" },
-    { content: "The earth does not belong to us: we belong to the earth.", author: "Marlee Matlin" },
-    { content: "We do not inherit the earth from our ancestors, we borrow it from our children.", author: "Native American Proverb" },
-    { content: "The best time to plant a tree is twenty years ago. The second best time is now.", author: "Chinese Proverb" },
-    { content: "Nature always wears the colors of the spirit.", author: "Ralph Waldo Emerson" },
-    { content: "The greatest threat to our planet is the belief that someone else will save it.", author: "Robert Swan" },
-    { content: "In every walk with nature, one receives far more than he seeks.", author: "John Muir" },
-    { content: "Nature does not hurry, yet everything is accomplished.", author: "Lao Tzu" },
-    { content: "The sun does not shine for a few trees and flowers, but for the wide world’s joy.", author: "Henry Ward Beecher" },
-    { content: "The more I learn about people, the more I like my dog.", author: "Mark Twain" },
-    { content: "In every walk with nature, one receives far more than he seeks.", author: "John Muir" },
-    { content: "The best way to find yourself is to lose yourself in the service of others.", author: "Mahatma Gandhi" },
-    { content: "The earth has music for those who listen.", author: "William Shakespeare" },
-    { content: "The greatest glory of a tree is not its foliage, but its persistence through seasons.", author: "Unknown" },
-    { content: "To walk in nature is to witness a thousand miracles.", author: "Mary Davis" },
-    { content: "If you have a garden and a library, you have everything you need.", author: "Marcus Tullius Cicero" },
-    { content: "The sun is a daily reminder that we too can rise again from the darkness.", author: "Unknown" },
-    { content: "Nature is the art of God.", author: "Dante Alighieri" },
-    { content: "The best way to appreciate your job is to imagine yourself without one.", author: "Oscar Wilde" },
-    { content: "Nature is not a place to visit. It is home.", author: "Gary Snyder" },
-    { content: "The earth laughs in flowers.", author: "Ralph Waldo Emerson" },
-    { content: "Nature does not hurry, yet everything is accomplished.", author: "Lao Tzu" },
-    { content: "To plant a garden is to believe in tomorrow.", author: "Audre Lorde" },
-    { content: "The best way to predict the future is to create it.", author: "Peter Drucker" },
-    { content: "Nature is the ultimate teacher.", author: "Unknown" },
-    { content: "The forest is a quiet place if only the best of the best will survive.", author: "Unknown" },
-    { content: "In every walk with nature one receives far more than he seeks.", author: "John Muir" },
-    { content: "The earth is what we all have in common.", author: "Wendell Berry" },
-    { content: "Every flower is a soul blossoming in nature.", author: "Gerard De Nerval" },
-    { content: "The trees are the earth’s endless effort to speak to the listening heaven.", author: "Rabindranath Tagore" },
-    { content: "The mountains are calling and I must go.", author: "John Muir" },
-    { content: "The creation of a thousand forests is in one acorn.", author: "Ralph Waldo Emerson" },
-    { content: "A tree is a poem that the earth writes upon the sky.", author: "Khalil Gibran" },
-    { content: "The best friend on earth of man is the tree. When we use the tree respectfully and economically, we have one of the most sustainable resources on the planet.", author: "Frank Lloyd Wright" },
-    { content: "He who plants a tree plants a hope.", author: "Lucy Larcom" },
-    { content: "The clearest way into the Universe is through a forest wilderness.", author: "John Muir" },
-    { content: "The mountains are calling and I must go.", author: "John Muir" },
-    { content: "To sit in the shade on a fine day and look upon verdure is the most perfect refreshment.", author: "Jane Austen" },
-    { content: "The earth has music for those who listen.", author: "William Shakespeare" },
-    { content: "A society grows great when people plant trees whose shade they know they shall never sit in.", author: "Greek Proverb" },
-    { content: "Nature does not hurry, yet everything is accomplished.", author: "Lao Tzu" },
-    { content: "The best time to plant a tree was 20 years ago. The second-best time is now.", author: "Chinese Proverb" },
-    { content: "To plant a garden is to believe in tomorrow.", author: "Audre Lorde" },
-    { content: "The beauty of the natural world lies in the details.", author: "Natalie Angier" },
-    { content: "The earth does not belong to us: we belong to the earth.", author: "Marlee Matlin" },
-    { content: "We do not inherit the earth from our ancestors, we borrow it from our children.", author: "Native American Proverb" },
-    { content: "Nature always wears the colors of the spirit.", author: "Ralph Waldo Emerson" },
-    { content: "The greatest threat to our planet is the belief that someone else will save it.", author: "Robert Swan" },
-    { content: "The sun does not shine for a few trees and flowers, but for the wide world’s joy.", author: "Henry Ward Beecher" },
-    { content: "In every walk with nature one receives far more than he seeks.", author: "John Muir" },
-    { content: "Nature is the ultimate teacher.", author: "Unknown" },
-    { content: "The best way to predict the future is to create it.", author: "Peter Drucker" },
-    { content: "The most beautiful gift of nature is that it gives one pleasure to look around and find beauty in all its forms.", author: "Jane Austen" },
-    { content: "A tree’s best friend is the one who plants it, waters it, and stands by it.", author: "Unknown" },
-    { content: "The forest is a quiet place if only the best of the best will survive.", author: "Unknown" },
-    { content: "A tree is a poem that the earth writes upon the sky.", author: "Khalil Gibran" },
-    { content: "The earth laughs in flowers.", author: "Ralph Waldo Emerson" },
-    { content: "To walk in nature is to witness a thousand miracles.", author: "Mary Davis" },
-    { content: "Every flower is a soul blossoming in nature.", author: "Gerard De Nerval" },
-    { content: "Nature does not hurry, yet everything is accomplished.", author: "Lao Tzu" },
-    { content: "The best way to appreciate your job is to imagine yourself without one.", author: "Oscar Wilde" },
-    { content: "The earth has music for those who listen.", author: "William Shakespeare" },
-    { content: "In every walk with nature, one receives far more than he seeks.", author: "John Muir" },
-    { content: "The sun is a daily reminder that we too can rise again from the darkness.", author: "Unknown" },
-    { content: "Nature is the ultimate teacher.", author: "Unknown" },
-    { content: "The greatest glory of a tree is not its foliage, but its persistence through seasons.", author: "Unknown" },
-    { content: "The earth is what we all have in common.", author: "Wendell Berry" },
-    { content: "The trees are the earth’s endless effort to speak to the listening heaven.", author: "Rabindranath Tagore" },
-    { content: "A tree’s best friend is the one who plants it, waters it, and stands by it.", author: "Unknown" },
-    { content: "To walk in nature is to witness a thousand miracles.", author: "Mary Davis" }
-];
-
-        
-                    const getRandomQuote = () => {
-                        const randomIndex = Math.floor(Math.random() * quotes.length);
-                        return quotes[randomIndex];
-                    };
-        
-                    const updateQuote = (content, authorName) => {
-                        quote.innerText = content;
-                        author.innerText = authorName;
-                        let existsInFavorites = checkExistence(content, authorName);
-                        let heartIcon = favourite.firstElementChild;
-                        if (existsInFavorites) {
-                            heartIcon.classList.remove('fa-regular');
-                            heartIcon.classList.add('fa-solid', 'active');
-                        } else {
-                            heartIcon.classList.add('fa-regular');
-                            heartIcon.classList.remove('fa-solid', 'active');
-                        }
-                    };
-        
-                    const displayFavorites = () => {
-                        list.innerHTML = '';
-                        favorites.forEach((q, index) => {
-                            const listItem = document.createElement('li');
-                            listItem.textContent = `${index}. ${q.content} - ${q.author}`;
-                            list.appendChild(listItem);
-                        });
-                    };
-        
-                    const saveFavoritesToLocalStorage = () => {
-                        localStorage.setItem('favorites', JSON.stringify(favorites));
-                    };
-        
-                    const checkExistence = (content, authorName) => {
-                        return favorites.some(
-                            (q) => q.content === content && q.author === authorName
-                        );
-                    };
-        
-                    // const addToFavorites = () => {
-                    //     let heartIcon = favourite.firstElementChild;
-                    //     heartIcon.classList.remove('fa-regular');
-                    //     heartIcon.classList.add('fa-solid', 'active');
-        
-                    //     const content = quote.innerText;
-                    //     const authorName = author.innerText;
-                    //     const existsInFavorites = checkExistence(content, authorName);
-                    //     if (!existsInFavorites) {
-                    //         favorites.push({ content, author: authorName });
-                    //         saveFavoritesToLocalStorage();
-                    //         displayFavorites();
-                    //     }
-                    // };
-        
-                    const copyToClipboard = (text) => {
-                        const textarea = document.createElement('textarea');
-                        textarea.value = text;
-                        document.body.appendChild(textarea);
-                        textarea.select();
-                        document.execCommand('copy');
-                        document.body.removeChild(textarea);
-                    };
-        
-                    copyButton.addEventListener('click', () => {
-                        copyToClipboard(quote.innerText);
-                    });
-        
-                    const clearFavoritesFromLocalStorage = () => {
-                        localStorage.removeItem('favorites');
-                        favorites = [];
-                        displayFavorites();
-                        favoriteContainer.style.display = 'none';
-                        list.style.display = 'none';
-                        let heartIcon = favourite.firstElementChild;
-                        if (heartIcon.classList.contains('fa-solid')) {
-                            heartIcon.classList.add('fa-regular');
-                            heartIcon.classList.remove('fa-solid', 'active');
-                        }
-                    };
-        
-                    showAllListOfFavourite.addEventListener('click', () => {
-                        quote.style.display = 'none'; // Hide the quote
-                        author.style.display = 'none'; // Hide the author
-                        if (favorites.length == 0) {
-                            list.innerHTML = "<p>You haven't added a favorite yet</p>";
-                        }
-                        list.style.display = 'block';
-                        favoriteContainer.style.display = 'block';
-                    });
-        
-                    closeButton.addEventListener('click', () => {
-                        list.style.display = 'none';
-                        favoriteContainer.style.display = 'none';
-                        quote.style.display = 'block'; // Show the quote again
-                        author.style.display = 'block'; // Show the author again
-                    });
-        
-                    window.addEventListener('load', () => {
-                        list.style.display = 'none';
-                        favoriteContainer.style.display = 'none';
-                        favourite.addEventListener('click', addToFavorites);
-                        clearButton.addEventListener('click', clearFavoritesFromLocalStorage);
-                        const storedFavorites = localStorage.getItem('favorites');
-                        if (storedFavorites) {
-                            favorites = JSON.parse(storedFavorites);
-                            displayFavorites();
-                        }
-                        // Fetch a random quote when the page loads
-                        const initialQuote = getRandomQuote();
-                        updateQuote(initialQuote.content, initialQuote.author);
-                    });
-        
-                    btn.addEventListener('click', () => {
-                        const newQuote = getRandomQuote();
-                        updateQuote(newQuote.content, newQuote.author);
-                    });
-        
-                    quote.addEventListener('click', () => {
-                        copyToClipboard(quote.innerText);
-                    });
-                });
-            </script>
-        </div>
-    </section>
-                                
-    <!-- ##### Hero Area End ##### -->
-
-    <!-- ##### All Javascript Files ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
 </body>
 
 </html>

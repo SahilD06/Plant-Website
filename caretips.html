@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Tips - Plant Codex</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #2d3748;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            padding: 100px 20px 50px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('bg4.jpeg') no-repeat center center;
+            background-size: cover;
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 0 auto 60px;
+            width: fit-content;
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .page-header::before {
+            content: '\f06c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            display: block;
+            margin-bottom: 20px;
+            color: #1b4332;
+            font-size: 24px;
+            animation: growLeaf 1.5s ease-out;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #1b4332, transparent);
+            animation: expandLine 1.5s ease-out forwards;
+        }
+
+        @keyframes growLeaf {
+            0% {
+                transform: scale(0) rotate(-45deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes expandLine {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+
+            100% {
+                width: 120px;
+                opacity: 1;
+            }
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            color: #1b4332;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.6);
+            letter-spacing: -1px;
+            font-weight: 700;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: #2d6a4f;
+            font-weight: 600;
+            margin: 0;
+            opacity: 0.9;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(112, 199, 69, 0.1);
+        }
+
+        .navbar.scrolled {
+            padding: 15px 50px;
+            box-shadow: 0 5px 30px rgba(112, 199, 69, 0.15);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #4CAF50;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #4CAF50;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #70c745, #4CAF50);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: #4CAF50;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #4CAF50;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+            border-color: #4CAF50;
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 30px rgba(112, 199, 69, 0.2);
+        }
+
+        .tip-card h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .tip-card p {
+            color: #000000;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .tip-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4CAF50, #70c745);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="logo.png" alt="Plant Codex">
+                <span>Plant Codex</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="database.html"><i class="fas fa-database"></i> Database</a></li>
+                <li><a href="caretips.html"><i class="fas fa-leaf"></i> Care Tips</a></li>
+                <li><a href="service.html"><i class="fas fa-cogs"></i> Services</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Plant Care Tips</h1>
+            <p>Expert advice to help your plants thrive</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>
+                <div class="tip-icon"><i class="fas fa-tint"></i></div> Watering
+            </h3>
+            <p>Most plants need consistent moisture, but overwatering is one of the most common mistakes. Check the soil
+                before watering—it should be dry to the touch about 1-2 inches below the surface. Water thoroughly until
+                it drains from the bottom, then empty the saucer to prevent root rot.</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>
+                <div class="tip-icon"><i class="fas fa-sun"></i></div> Sunlight
+            </h3>
+            <p>Understanding your plant's light requirements is crucial. Most indoor plants prefer indirect bright
+                light. Place them near windows but avoid direct afternoon sun which can scorch leaves. South-facing
+                windows provide the most light, while north-facing provide the least.</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>
+                <div class="tip-icon"><i class="fas fa-temperature-high"></i></div> Temperature & Humidity
+            </h3>
+            <p>Most houseplants thrive in temperatures between 65-75°F (18-24°C). Avoid placing plants near heating
+                vents, air conditioners, or drafty windows. Many tropical plants appreciate humidity—mist leaves
+                regularly or use a pebble tray with water.</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>
+                <div class="tip-icon"><i class="fas fa-seedling"></i></div> Soil & Fertilizer
+            </h3>
+            <p>Use well-draining potting mix appropriate for your plant type. Fertilize during the growing season(spring
+                and summer) with a balanced, water-soluble fertilizer diluted to half strength. Reduce fertilizing in
+                fall and winter when plant growth slows.</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>
+                <div class="tip-icon"><i class="fas fa-cut"></i></div> Pruning & Maintenance
+            </h3>
+            <p>Regular pruning encourages bushier growth and removes dead or yellowing leaves. Use clean, sharp scissors
+                or pruning shears. Wipe leaves periodically to remove dust and allow better photosynthesis. Rotate
+                plants weekly for even growth.</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>
+                <div class="tip-icon"><i class="fas fa-bug"></i></div> Pest Control
+            </h3>
+            <p>Inspect plants regularly for pests like aphids, spider mites, or mealybugs. Isolate affected plants
+                immediately. Treat with insecticidal soap or neem oil. Prevention is key—keep plants healthy with proper
+                care and quarantine new plants for 2 weeks.</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>
+                <div class="tip-icon"><i class="fas fa-arrows-alt"></i></div> Repotting
+            </h3>
+            <p>Repot plants every 1-2 years or when roots grow through drainage holes. Choose a pot 1-2 inches larger in
+                diameter. Spring is the best time to repot. Use fresh potting mix and water thoroughly after repotting.
+            </p>
+        </div>
+
+        <div class="tip-card">
+            <h3>
+                <div class="tip-icon"><i class="fas fa-heart"></i></div> General Care
+            </h3>
+            <p>Every plant is unique—research specific care requirements for your species. Observe your plants daily and
+                learn their signals. Drooping leaves might need water, while yellow leaves could indicate overwatering.
+                Patience and consistency are key to plant care success!</p>
+        </div>
+    </div>
+
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/plugins.js"></script>
+    <script src="js/active.js"></script>
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>
