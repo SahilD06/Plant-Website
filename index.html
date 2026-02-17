@@ -17,33 +17,12 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
         rel="stylesheet">
 
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css">
+
     <style>
-        /* RESET & BASE */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: #2d3748;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
-
         body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('background.jpg') no-repeat center center;
-            background-size: cover;
-            filter: blur(3px);
-            z-index: -1;
+            background-image: url('background.jpg');
         }
 
         /* ANIMATED BACKGROUND PARTICLES */
@@ -56,173 +35,6 @@
             overflow: hidden;
             z-index: 0;
             pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, rgba(112, 199, 69, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        .particle:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .particle:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 50%;
-            left: 80%;
-            animation-delay: 2s;
-        }
-
-        .particle:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 70%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        .particle:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            top: 30%;
-            left: 60%;
-            animation-delay: 6s;
-        }
-
-        .particle:nth-child(5) {
-            width: 90px;
-            height: 90px;
-            top: 80%;
-            left: 70%;
-            animation-delay: 3s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0) translateX(0) scale(1);
-                opacity: 0.3;
-            }
-
-            25% {
-                transform: translateY(-50px) translateX(30px) scale(1.1);
-                opacity: 0.5;
-            }
-
-            50% {
-                transform: translateY(-100px) translateX(-30px) scale(0.9);
-                opacity: 0.3;
-            }
-
-            75% {
-                transform: translateY(-50px) translateX(20px) scale(1.05);
-                opacity: 0.4;
-            }
-        }
-
-        /* NAVIGATION */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 50px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 20px rgba(112, 199, 69, 0.1);
-        }
-
-        .navbar.scrolled {
-            padding: 15px 50px;
-            box-shadow: 0 5px 30px rgba(112, 199, 69, 0.15);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 28px;
-            font-weight: 700;
-            color: #4CAF50;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 3px solid #4CAF50;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            color: #000000;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #70c745, #4CAF50);
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
-        .nav-menu a:hover {
-            color: #4CAF50;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
-
-        .menu-toggle span {
-            width: 30px;
-            height: 3px;
-            background: #4CAF50;
-            transition: all 0.3s ease;
         }
 
         /* HERO SECTION */
@@ -1034,10 +846,10 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
+            <a href="index.html" class="logo">
                 <img src="logo.png" alt="Plant Codex">
                 <span>Plant Codex</span>
-            </div>
+            </a>
             <ul class="nav-menu">
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
@@ -1070,15 +882,19 @@
 
 
 
-            <!-- Quote Section -->
+            <!-- Plant of the Day Section -->
             <div class="quote-section">
-                <p id="quote" class="quote-text">Plants give us oxygen for the lungs and for the soul.</p>
-                <p id="author" class="quote-author">Terri Guillemets</p>
+                <h3
+                    style="color: #4CAF50; margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 36px; text-transform: uppercase; letter-spacing: 2px;">
+                    Discover</h3>
+                <h2 id="plant-name" class="quote-author" style="font-size: 28px; margin-bottom: 10px;">Loading...</h2>
+                <div id="plant-info" class="quote-text" style="font-size: 18px; margin-bottom: 20px;">
+                    <p id="plant-type-display"></p>
+                    <p id="plant-location-display"></p>
+                </div>
                 <div class="quote-controls">
-                    <button id="btn" class="quote-btn"><i class="fas fa-sync-alt"></i> New Quote</button>
-                    <button id="copy" class="quote-btn icon-only"><i class="fas fa-copy"></i></button>
-                    <button id="favourite" class="quote-btn icon-only"><i class="fa-regular fa-heart"></i></button>
-                    <button id="show-list" class="quote-btn icon-only"><i class="fas fa-list"></i></button>
+                    <button id="next-plant" class="quote-btn"><i class="fas fa-sync-alt"></i> Discover Another</button>
+                    <button id="view-plant" class="quote-btn"><i class="fas fa-eye"></i> View Details</button>
                 </div>
             </div>
         </div>
@@ -1135,16 +951,8 @@
     <script src="js/plugins/plugins.js"></script>
     <script src="js/active.js"></script>
 
+    <script src="js/main.js"></script>
     <script>
-        // Navigation scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
 
         // Mobile menu toggle
         const menuToggle = document.querySelector('.menu-toggle');
@@ -1351,125 +1159,43 @@
             document.getElementById('mapContainer').innerHTML = '';
         }
 
-        // Quote functionality
+        // Plant of the Day functionality
         document.addEventListener('DOMContentLoaded', () => {
-            let quote = document.getElementById('quote');
-            let author = document.getElementById('author');
-            let btn = document.getElementById('btn');
-            let favourite = document.getElementById('favourite');
-            let list = document.getElementById('list-of-favourite-quotes');
-            let copyButton = document.getElementById('copy');
-            let showAllListOfFavourite = document.getElementById('show-list');
-            let favoriteContainer = document.querySelector('.favorite-container');
-            let closeButton = document.getElementById('close-favorite');
-            let favorites = [];
+            const plantName = document.getElementById('plant-name');
+            const plantTypeDisplay = document.getElementById('plant-type-display');
+            const plantLocationDisplay = document.getElementById('plant-location-display');
+            const nextBtn = document.getElementById('next-plant');
+            const viewBtn = document.getElementById('view-plant');
 
-            const quotes = [
-                { content: "The earth has music for those who listen.", author: "William Shakespeare" },
-                { content: "To plant a garden is to believe in tomorrow.", author: "Audre Lorde" },
-                { content: "The best time to plant a tree was 20 years ago. The second-best time is now.", author: "Chinese Proverb" },
-                { content: "In every walk with nature one receives far more than he seeks.", author: "John Muir" },
-                { content: "The creation of a thousand forests is in one acorn.", author: "Ralph Waldo Emerson" },
-                { content: "Nature does not hurry, yet everything is accomplished.", author: "Lao Tzu" },
-                { content: "The earth laughs in flowers.", author: "Ralph Waldo Emerson" },
-                { content: "Trees are the earth's endless effort to speak to the listening heaven.", author: "Rabindranath Tagore" },
-            ];
+            const updatePlantOfTheDay = () => {
+                if (!window.plants || window.plants.length === 0) return;
 
-            const getRandomQuote = () => {
-                const randomIndex = Math.floor(Math.random() * quotes.length);
-                return quotes[randomIndex];
-            };
+                const randomIndex = Math.floor(Math.random() * window.plants.length);
+                const plant = window.plants[randomIndex];
 
-            const updateQuote = (content, authorName) => {
-                quote.innerText = content;
-                author.innerText = authorName;
-                let existsInFavorites = checkExistence(content, authorName);
-                let heartIcon = favourite.firstElementChild;
-                if (existsInFavorites) {
-                    heartIcon.classList.remove('fa-regular');
-                    heartIcon.classList.add('fa-solid', 'active');
-                } else {
-                    heartIcon.classList.add('fa-regular');
-                    heartIcon.classList.remove('fa-solid', 'active');
+                if (plantName) plantName.innerText = plant.name;
+                if (plantTypeDisplay) plantTypeDisplay.innerHTML = `<strong>Type:</strong> ${plant.type}`;
+                if (plantLocationDisplay) plantLocationDisplay.innerHTML = `<strong>Prevalent in:</strong> ${plant.location}`;
+
+                if (viewBtn) {
+                    viewBtn.onclick = () => {
+                        document.getElementById('searchInput').value = plant.name;
+                        searchPlants();
+                    };
                 }
             };
 
-            const displayFavorites = () => {
-                list.innerHTML = '';
-                favorites.forEach((q, index) => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `${index + 1}. ${q.content} - ${q.author}`;
-                    list.appendChild(listItem);
-                });
-            };
-
-            const saveFavoritesToLocalStorage = () => {
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-            };
-
-            const checkExistence = (content, authorName) => {
-                return favorites.some(q => q.content === content && q.author === authorName);
-            };
-
-            const addToFavorites = () => {
-                let heartIcon = favourite.firstElementChild;
-                const content = quote.innerText;
-                const authorName = author.innerText;
-                const existsInFavorites = checkExistence(content, authorName);
-
-                if (!existsInFavorites) {
-                    favorites.push({ content, author: authorName });
-                    heartIcon.classList.remove('fa-regular');
-                    heartIcon.classList.add('fa-solid');
-                    saveFavoritesToLocalStorage();
-                    displayFavorites();
-                } else {
-                    favorites = favorites.filter(q => !(q.content === content && q.author === authorName));
-                    heartIcon.classList.add('fa-regular');
-                    heartIcon.classList.remove('fa-solid');
-                    saveFavoritesToLocalStorage();
-                    displayFavorites();
-                }
-            };
-
-            const copyToClipboard = (text) => {
-                navigator.clipboard.writeText(text).then(() => {
-                    alert('Quote copied to clipboard!');
-                });
-            };
-
-            copyButton.addEventListener('click', () => {
-                copyToClipboard(quote.innerText + ' - ' + author.innerText);
-            });
-
-            showAllListOfFavourite.addEventListener('click', () => {
-                if (favorites.length == 0) {
-                    list.innerHTML = "<p>You haven't added a favorite yet</p>";
-                }
-                favoriteContainer.style.display = 'block';
-            });
-
-            closeButton.addEventListener('click', () => {
-                favoriteContainer.style.display = 'none';
-            });
-
-            favourite.addEventListener('click', addToFavorites);
-
-            // Load saved favorites
-            const storedFavorites = localStorage.getItem('favorites');
-            if (storedFavorites) {
-                favorites = JSON.parse(storedFavorites);
-                displayFavorites();
+            if (nextBtn) {
+                nextBtn.addEventListener('click', updatePlantOfTheDay);
             }
 
-            // Initial quote
-            const initialQuote = getRandomQuote();
-            updateQuote(initialQuote.content, initialQuote.author);
-
-            btn.addEventListener('click', () => {
-                const newQuote = getRandomQuote();
-                updateQuote(newQuote.content, newQuote.author);
-            });
+            // Wait for plants to load before initializing
+            const checkData = setInterval(() => {
+                if (window.plants && window.plants.length > 0) {
+                    updatePlantOfTheDay();
+                    clearInterval(checkData);
+                }
+            }, 100);
         });
     </script>
 </body>
