@@ -887,13 +887,15 @@
                 <h3
                     style="color: #4CAF50; margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 36px; text-transform: uppercase; letter-spacing: 2px;">
                     Discover</h3>
-                <h2 id="plant-name" class="quote-author" style="font-size: 28px; margin-bottom: 10px;">Loading...</h2>
+                <h2 id="plant-name" class="quote-author" style="font-size: 28px; margin-bottom: 10px;">Loading...
+                </h2>
                 <div id="plant-info" class="quote-text" style="font-size: 18px; margin-bottom: 20px;">
                     <p id="plant-type-display"></p>
                     <p id="plant-location-display"></p>
                 </div>
                 <div class="quote-controls">
-                    <button id="next-plant" class="quote-btn"><i class="fas fa-sync-alt"></i> Discover Another</button>
+                    <button id="next-plant" class="quote-btn"><i class="fas fa-sync-alt"></i> Discover
+                        Another</button>
                     <button id="view-plant" class="quote-btn"><i class="fas fa-eye"></i> View Details</button>
                 </div>
             </div>
@@ -944,260 +946,13 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <script src="js/bootstrap/popper.min.js"></script>
     <script src="js/bootstrap/bootstrap.min.js"></script>
     <script src="js/plugins/plugins.js"></script>
     <script src="js/active.js"></script>
-
     <script src="js/main.js"></script>
-    <script>
-
-        // Mobile menu toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
-
-        // Plant list panel toggle
-        const togglePanel = document.getElementById('toggle-panel');
-        const plantPanel = document.getElementById('plant-panel');
-        const closePanel = document.getElementById('close-panel');
-
-        togglePanel.addEventListener('click', () => {
-            plantPanel.classList.add('open');
-        });
-
-        closePanel.addEventListener('click', () => {
-            plantPanel.classList.remove('open');
-        });
-
-        // Load plant list from Excel
-        document.addEventListener('DOMContentLoaded', () => {
-            const plantList = document.getElementById('plant-list');
-            const searchInput = document.getElementById('searchInput');
-            const searchButton = document.querySelector('.search-box button');
-
-            fetch('plantnames.xlsx')
-                .then(response => response.arrayBuffer())
-                .then(data => {
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const sheetName = workbook.SheetNames[0];
-                    const sheet = workbook.Sheets[sheetName];
-                    const range = sheet['!ref'];
-                    const [startCell, endCell] = range.split(':');
-                    const startRow = parseInt(startCell.replace(/\D/g, ''));
-                    const endRow = parseInt(endCell.replace(/\D/g, ''));
-
-                    for (let row = startRow; row <= endRow; row++) {
-                        const cellAddress = `A${row}`;
-                        const cell = sheet[cellAddress];
-                        if (cell && cell.v) {
-                            const listItem = document.createElement('li');
-                            const listItemLink = document.createElement('a');
-                            listItemLink.href = '#';
-                            listItemLink.textContent = cell.v;
-                            listItemLink.addEventListener('click', (event) => {
-                                event.preventDefault();
-                                searchInput.value = cell.v;
-                                searchButton.click();
-                                plantPanel.classList.remove('open');
-                            });
-                            listItem.appendChild(listItemLink);
-                            plantList.appendChild(listItem);
-                        }
-                    }
-                })
-                .catch(error => console.error('Error loading plant list:', error));
-
-            // Enter key search
-            searchInput.addEventListener('keypress', (event) => {
-                if (event.key === 'Enter') {
-                    searchPlants();
-                }
-            });
-
-            // Load plant data
-            fetch('https://gist.githubusercontent.com/SahilD06/1ea5dbae8c37b2917d6fe345d10dbaf1/raw/74fcb00d739ff7b16f5f7f01dddf61921944153d/plant_data.tsv')
-                .then(response => response.text())
-                .then(data => {
-                    const plants = parseCSV(data);
-                    window.plants = plants;
-                })
-                .catch(error => console.error('Error fetching plant data:', error));
-        });
-
-        function parseCSV(data) {
-            const lines = data.trim().split('\n');
-            // Skip the first line (header)
-            return lines.slice(1).map(line => {
-                // Split by Tab
-                const fields = line.split('\t');
-
-                // Map according to your Gist's column order
-                return {
-                    name: fields[1],              // Common Name
-                    scientificName: fields[2],     // Scientific Name
-                    height: fields[3],             // Height
-                    description: fields[4],        // Description
-                    googleLink: fields[5],         // Information
-                    youtubeLink: fields[6],        // Youtube
-                    type: fields[7],               // Type
-                    location: fields[8],           // Prevalent in
-                    lifespan: fields[9],           // Lifespan
-                    oxygenLevel: fields[10]        // Oxygen production
-                };
-            });
-        }
-
-        function normalizeString(str) {
-            return str.trim().toLowerCase();
-        }
-
-        function capitalizeWords(str) {
-            return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-        }
-
-        function searchPlants() {
-            const searchInput = normalizeString(document.getElementById('searchInput').value);
-            const resultsContainer = document.getElementById('results');
-            resultsContainer.innerHTML = '';
-
-            const filteredPlants = window.plants.filter(plant =>
-                normalizeString(plant
-
-                    .name).includes(searchInput)
-            );
-
-            if (filteredPlants.length === 0) {
-                resultsContainer.innerHTML = '<p class="not-found">No plants found</p>';
-                openModal();
-                return;
-            }
-
-            const displayedNames = new Set();
-
-            filteredPlants.forEach((plant, index) => {
-                if (!displayedNames.has(normalizeString(plant.name))) {
-                    displayedNames.add(normalizeString(plant.name));
-
-                    const imageName = capitalizeWords(plant.name) + '.jpg';
-
-                    const plantCard = document.createElement('div');
-                    plantCard.className = 'plant-card';
-                    plantCard.innerHTML = `
-                        <img src="images/${imageName}" alt="${plant.name}" onclick="openImageModal('images/${imageName}')">
-                        <div class="plant-details">
-                            <h2>${plant.name} (${plant.scientificName})</h2>
-                            <p><strong>Type:</strong> ${plant.type}</p>
-                            <p><strong>Height:</strong> ${plant.height}</p>
-                            <p><strong>Lifespan:</strong> ${plant.lifespan} years</p>
-                            <p><strong>Oxygen Level:</strong> ${plant.oxygenLevel}</p>
-                            <p>${plant.description}</p>
-                            <div class="plant-links">
-                                <a href="${plant.googleLink}" target="_blank" class="plant-link">
-                                    <i class="fas fa-info-circle"></i> More Info
-                                </a>
-                                <a href="${plant.youtubeLink}" target="_blank" class="plant-link">
-                                    <i class="fab fa-youtube"></i> Watch Video
-                                </a>
-                            </div>
-                        </div>
-                    `;
-                    resultsContainer.appendChild(plantCard);
-
-                    setTimeout(() => {
-                        plantCard.style.opacity = 1;
-                        plantCard.style.transform = 'translateY(0)';
-                    }, index * 100);
-                }
-            });
-
-            openModal();
-        }
-
-        function openModal() {
-            document.getElementById('myModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none';
-        }
-
-        function openImageModal(imageSrc) {
-            document.getElementById('modalImage').src = imageSrc;
-            document.getElementById('imageModal').style.display = 'flex';
-        }
-
-        function closeImageModal() {
-            document.getElementById('imageModal').style.display = 'none';
-        }
-
-        function openMapModal(location) {
-            const apiKey = 'AIzaSyC_X8p8OmhmohqVseE0tGn9hb9n6zSeYl4';
-            const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${encodeURIComponent(location.trim())}`;
-
-            const mapContainer = document.getElementById('mapContainer');
-            mapContainer.innerHTML = `<iframe width="100%" height="100%" frameborder="0" style="border:0" src="${mapUrl}" allowfullscreen></iframe>`;
-            document.getElementById('mapModal').style.display = 'block';
-        }
-
-        function closeMapModal() {
-            document.getElementById('mapModal').style.display = 'none';
-            document.getElementById('mapContainer').innerHTML = '';
-        }
-
-        // Plant of the Day functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            const plantName = document.getElementById('plant-name');
-            const plantTypeDisplay = document.getElementById('plant-type-display');
-            const plantLocationDisplay = document.getElementById('plant-location-display');
-            const nextBtn = document.getElementById('next-plant');
-            const viewBtn = document.getElementById('view-plant');
-
-            const updatePlantOfTheDay = () => {
-                if (!window.plants || window.plants.length === 0) return;
-
-                const randomIndex = Math.floor(Math.random() * window.plants.length);
-                const plant = window.plants[randomIndex];
-
-                if (plantName) plantName.innerText = plant.name;
-                if (plantTypeDisplay) plantTypeDisplay.innerHTML = `<strong>Type:</strong> ${plant.type}`;
-                if (plantLocationDisplay) plantLocationDisplay.innerHTML = `<strong>Prevalent in:</strong> ${plant.location}`;
-
-                if (viewBtn) {
-                    viewBtn.onclick = () => {
-                        document.getElementById('searchInput').value = plant.name;
-                        searchPlants();
-                    };
-                }
-            };
-
-            if (nextBtn) {
-                nextBtn.addEventListener('click', updatePlantOfTheDay);
-            }
-
-            // Wait for plants to load before initializing
-            const checkData = setInterval(() => {
-                if (window.plants && window.plants.length > 0) {
-                    updatePlantOfTheDay();
-                    clearInterval(checkData);
-                }
-            }, 100);
-        });
-    </script>
+    <script src="js/plants-logic.js"></script>
 </body>
 
 </html>
