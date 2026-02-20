@@ -21,14 +21,15 @@ function parseTSV(data) {
     return lines.slice(1).map(line => {
         const fields = line.split('\t');
         return {
-            name: fields[0],
-            scientificName: fields[1]
+            name: fields[0] ? fields[0].trim() : '',
+            scientificName: fields[1] ? fields[1].trim() : ''
         };
     });
 }
 
 function capitalizeWords(str) {
-    return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    if (!str) return '';
+    return str.toLowerCase().trim().split(/\s+/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
 
 function getImagePath(plantName) {
@@ -53,6 +54,7 @@ function renderSpeciesGrid(plants) {
 
     plants.forEach(plant => {
         const imagePath = getImagePath(plant.name);
+        console.log(`[Debug] Archive Card: "${plant.name}", Generated Image Path: "${imagePath}"`);
         const detailUrl = `plant-details.html?name=${encodeURIComponent(plant.name)}`;
 
         const card = document.createElement('div');
