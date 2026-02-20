@@ -16,6 +16,27 @@ document.addEventListener('click', (e) => {
         menuToggle.classList.remove('active');
         navMenu.classList.remove('active');
     }
+
+    // Close Modals when clicking outside the content area
+    const modals = [
+        { id: 'myModal', contentClass: 'modal-content' },
+        { id: 'imageModal', contentClass: 'image-modal-content' },
+        { id: 'mapModal', contentClass: 'map-modal-content' }
+    ];
+
+    modals.forEach(m => {
+        const modal = document.getElementById(m.id);
+        if (modal && modal.style.display === 'flex' || (modal && modal.style.display === 'block')) {
+            const content = modal.querySelector(`.${m.contentClass}`);
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                if (m.id === 'mapModal') {
+                    const mapContainer = document.getElementById('mapContainer');
+                    if (mapContainer) mapContainer.innerHTML = '';
+                }
+            }
+        }
+    });
 });
 
 // Plant list panel toggle
@@ -105,6 +126,21 @@ function capitalizeWords(str) {
     return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
 
+function getImagePath(plantName) {
+    const capitalized = capitalizeWords(plantName);
+    // Hardcoded mapping for known extensions in Public folder
+    const jpegPlants = [
+        "Azaleas", "Chinese Fan Palm", "Cleyera", "Crape Jasmine",
+        "Punarnava", "Saman Tree", "Vasaka Plant",
+        "Yellow Flame Tree, Golden Flamboyante Or Yellow Poinciana.",
+        "Centipede Tongavine, Taro Vine, Silver Vine And Dragon-tail Plant",
+        "Japanese Sedge"
+    ];
+
+    const extension = jpegPlants.includes(capitalized) ? '.jpeg' : '.jpg';
+    return `Public/${capitalized}${extension}`;
+}
+
 function searchPlants() {
     const searchInputElem = document.getElementById('searchInput');
     if (!searchInputElem) return;
@@ -131,12 +167,12 @@ function searchPlants() {
         if (!displayedNames.has(normalizeString(plant.name))) {
             displayedNames.add(normalizeString(plant.name));
 
-            const imageName = capitalizeWords(plant.name) + '.jpg';
+            const imagePath = getImagePath(plant.name);
 
             const plantCard = document.createElement('div');
             plantCard.className = 'plant-card';
             plantCard.innerHTML = `
-                <img src="images/${imageName}" alt="${plant.name}" onclick="openImageModal('images/${imageName}')">
+                <img src="${imagePath}" alt="${plant.name}" onclick="openImageModal('${imagePath}')" onerror="this.src='images/placeholder.jpg'">
                 <div class="plant-details">
                     <h2>${plant.name}</h2>
                     <p><strong>Scientific Name:</strong> ${plant.scientificName}</p>
@@ -212,6 +248,7 @@ function updatePlantOfTheDay() {
     const plantTypeDisplay = document.getElementById('plant-type-display');
     const plantLocationDisplay = document.getElementById('plant-location-display');
     const viewBtn = document.getElementById('view-plant');
+    const plantInfoContainer = document.getElementById('plant-info');
 
     if (!window.plants || window.plants.length === 0) return;
 
@@ -221,6 +258,26 @@ function updatePlantOfTheDay() {
     if (plantName) plantName.innerText = plant.name;
     if (plantTypeDisplay) plantTypeDisplay.innerHTML = `<strong>Scientific Name:</strong> ${plant.scientificName}`;
     if (plantLocationDisplay) plantLocationDisplay.innerHTML = `<em>${plant.description.substring(0, 150)}...</em>`;
+
+    // Update or create image for Plant of the Day
+    let plantImg = document.getElementById('potd-image');
+    if (plantInfoContainer) {
+        if (!plantImg) {
+            plantImg = document.createElement('img');
+            plantImg.id = 'potd-image';
+            plantImg.style.width = '100%';
+            plantImg.style.maxWidth = '400px';
+            plantImg.style.borderRadius = '15px';
+            plantImg.style.marginBottom = '20px';
+            plantImg.style.cursor = 'pointer';
+            plantImg.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+            plantInfoContainer.insertBefore(plantImg, plantTypeDisplay);
+        }
+        const imgPath = getImagePath(plant.name);
+        plantImg.src = imgPath;
+        plantImg.alt = plant.name;
+        plantImg.onclick = () => openImageModal(imgPath);
+    }
 
     if (viewBtn) {
         viewBtn.onclick = () => {
