@@ -109,11 +109,11 @@ function parseCSV(data) {
         const fields = line.split('\t');
 
         return {
-            name: fields[0],              // Name of the Plant
-            scientificName: fields[1],     // Scientific Name
-            description: fields[2],        // Description
-            webLink: fields[3],            // Web Link
-            youtubeLink: fields[4]         // Youtube Link
+            name: fields[0] ? fields[0].trim() : '',              // Name of the Plant
+            scientificName: fields[1] ? fields[1].trim() : '',     // Scientific Name
+            description: fields[2] ? fields[2].trim() : '',        // Description
+            webLink: fields[3] ? fields[3].trim() : '',            // Web Link
+            youtubeLink: fields[4] ? fields[4].trim() : ''         // Youtube Link
         };
     });
 }
@@ -123,7 +123,8 @@ function normalizeString(str) {
 }
 
 function capitalizeWords(str) {
-    return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    if (!str) return '';
+    return str.toLowerCase().trim().split(/\s+/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
 
 function getImagePath(plantName) {
@@ -168,6 +169,7 @@ function searchPlants() {
             displayedNames.add(normalizeString(plant.name));
 
             const imagePath = getImagePath(plant.name);
+            console.log(`[Debug] Plant Card: "${plant.name}", Generated Image Path: "${imagePath}"`);
 
             const plantCard = document.createElement('div');
             plantCard.className = 'plant-card';

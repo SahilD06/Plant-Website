@@ -31,17 +31,18 @@ function parseTSV(data) {
     return lines.slice(1).map(line => {
         const fields = line.split('\t');
         return {
-            name: fields[0],
-            scientificName: fields[1],
-            description: fields[2],
-            webLink: fields[3],
-            youtubeLink: fields[4]
+            name: fields[0] ? fields[0].trim() : '',
+            scientificName: fields[1] ? fields[1].trim() : '',
+            description: fields[2] ? fields[2].trim() : '',
+            webLink: fields[3] ? fields[3].trim() : '',
+            youtubeLink: fields[4] ? fields[4].trim() : ''
         };
     });
 }
 
 function capitalizeWords(str) {
-    return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    if (!str) return '';
+    return str.toLowerCase().trim().split(/\s+/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
 
 function getImagePath(plantName) {
@@ -61,6 +62,7 @@ function getImagePath(plantName) {
 function renderPlantDetails(plant) {
     const container = document.getElementById('details-container');
     const imagePath = getImagePath(plant.name);
+    console.log(`[Debug] Plant Name: "${plant.name}", Generated Image Path: "${imagePath}"`);
 
     container.innerHTML = `
         <div class="details-card animate-fade-in">
