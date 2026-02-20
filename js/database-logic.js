@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const speciesGrid = document.getElementById('species-grid');
 
-    fetch('https://gist.githubusercontent.com/SahilD06/a983c4f6a9b4c3e0842a22f3fbfd66f9/raw/c95a8ab0cf20ceb42dd3013d769f8d04767f6d83/Plant_1.tsv')
+    fetch('https://gist.githubusercontent.com/SahilD06/a983c4f6a9b4c3e0842a22f3fbfd66f9/raw/28b743b5eabdd1794933395ca7974790c437a9eb/Plant_1.tsv')
         .then(response => response.text())
         .then(data => {
             const plants = parseTSV(data);
@@ -37,8 +37,6 @@ function getImagePath(plantName) {
     const jpegPlants = [
         "Azaleas", "Chinese Fan Palm", "Cleyera", "Crape Jasmine",
         "Punarnava", "Saman Tree", "Vasaka Plant",
-        "Yellow Flame Tree, Golden Flamboyante Or Yellow Poinciana.",
-        "Centipede Tongavine, Taro Vine, Silver Vine And Dragon-tail Plant",
         "Japanese Sedge"
     ];
 
